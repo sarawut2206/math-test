@@ -1523,11 +1523,11 @@
         // 5. Execute as: Me, Who has access: Anyone
         // 6. คัดลอก URL แล้วนำมาแทนที่ด้านล่าง
         
-        const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/a/macros/nk.ac.th/s/AKfycbxbPFfv3i4BiRP8TD2JVFenyZGZ6MUudUgX2ow4avB-BVwI6kv0TRURTEgWc3dhtFxS/exec";
 
         async function sendToGoogleSheets(data) {
             // ตรวจสอบว่าได้ตั้งค่า URL แล้วหรือยัง
-            if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
+            if (GOOGLE_SCRIPT_URL === "https://script.google.com/a/macros/nk.ac.th/s/AKfycbxbPFfv3i4BiRP8TD2JVFenyZGZ6MUudUgX2ow4avB-BVwI6kv0TRURTEgWc3dhtFxS/exec") {
                 console.warn("⚠️ กรุณาตั้งค่า GOOGLE_SCRIPT_URL ก่อนใช้งาน");
                 console.log("📊 ข้อมูลที่จะส่ง:", data);
                 alert("⚠️ ระบบยังไม่ได้เชื่อมต่อ Google Sheets\nกรุณาติดต่อครูเพื่อแก้ไข");
