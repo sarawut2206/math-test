@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบคณิตศาสตร์ ป.6 | TUTOR บ้านครู</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .student-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-field label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info-field input, .info-field select {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .info-field input:focus, .info-field select:focus {
+            outline: none;
+            border-color: #11998e;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .question-item {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .question-item:hover {
+            border-color: #11998e;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            min-width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .question-text {
+            font-size: 17px;
+            color: #212529;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .question-image {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .question-image svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 3px;
+            font-size: 1.1em;
+        }
+
+        .fraction-numerator {
+            border-bottom: 2px solid #212529;
+            padding: 0 5px 2px 5px;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .fraction-denominator {
+            padding: 2px 5px 0 5px;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .choices {
+            margin-top: 15px;
+        }
+
+        .choice-item {
+            padding: 12px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 2px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+        }
+
+        .choice-item:hover {
+            background: #e9ecef;
+            border-color: #11998e;
+            transform: translateX(5px);
+        }
+
+        .choice-item input[type="radio"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .choice-item label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-answer {
+            margin-top: 15px;
+        }
+
+        .input-answer input {
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 18px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .input-answer input:focus {
+            outline: none;
+            border-color: #11998e;
+            box-shadow: 0 0 0 3px rgba(17, 153, 142, 0.1);
+        }
+
+        .action-buttons {
+            position: sticky;
+            bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .success-message.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message h2 {
+            color: #155724;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #155724;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #11998e;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container { border-radius: 0; }
+            .main-content { padding: 20px; }
+            .question-text { font-size: 16px; }
+            .btn { min-width: 100%; }
+        }
+
+        .test-instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .test-instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .test-instructions ul {
+            color: #856404;
+            margin-left: 20px;
+        }
+
+        .test-instructions li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 แบบทดสอบคณิตศาสตร์ ป.6</h1>
+            <p>ครูแซม คณิตตรงจุด ติด Turbo</p>
+        </div>
+
+        <div class="main-content">
+            <!-- ข้อมูลนักเรียน -->
+            <div class="student-info">
+                <div class="info-row">
+                    <div class="info-field">
+                        <label>ชื่อ-นามสกุลนักเรียน <span class="required">*</span></label>
+                        <input type="text" id="studentName" placeholder="เช่น เด็กชายสมชาย ใจดี" required>
+                    </div>
+                    <div class="info-field">
+                        <label>โรงเรียน <span class="required">*</span></label>
+                        <input type="text" id="schoolName" placeholder="เช่น โรงเรียนประถมวัดหนองแขม" required>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <label>ชั้น</label>
+                        <select id="gradeLevel">
+                            <option value="ป.6">ป.6</option>
+                            <option value="ป.5">ป.5</option>
+                        </select>
+                    </div>
+                    <div class="info-field">
+                        <label>เบอร์โทรผู้ปกครอง</label>
+                        <input type="tel" id="parentPhone" placeholder="0812345678">
+                    </div>
+                    <div class="info-field">
+                        <label>วันที่ทำข้อสอบ</label>
+                        <input type="date" id="testDate">
+                    </div>
+                </div>
+            </div>
+
+            <!-- คำแนะนำ -->
+            <div class="test-instructions">
+                <h3>📌 คำแนะนำก่อนทำข้อสอบ</h3>
+                <ul>
+                    <li>แบบทดสอบนี้มี <strong>100 ข้อ</strong> ใช้เวลาประมาณ 60-75 นาที</li>
+                    <li>อ่านโจทย์ให้ละเอียด คิดให้รอบคอบก่อนตอบ</li>
+                    <li>สามารถย้อนกลับไปแก้คำตอบได้ก่อนกดส่ง</li>
+                    <li>กรุณากรอกข้อมูลให้ครบถ้วนก่อนเริ่มทำข้อสอบ</li>
+                </ul>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0/100</div>
+            </div>
+
+            <!-- ข้อสอบ -->
+            <div id="testSection"></div>
+
+            <!-- Loading -->
+            <div class="loading" id="loadingSection">
+                <div class="spinner"></div>
+                <p>กำลังส่งข้อมูล...</p>
+            </div>
+
+            <!-- ข้อความสำเร็จ -->
+            <div class="success-message" id="successMessage">
+                <h2>✅ ส่งข้อสอบสำเร็จ!</h2>
+                <p>ขอบคุณที่ทำแบบทดสอบค่ะ<br>
+                ผลการทดสอบจะถูกส่งไปยังครูเพื่อวิเคราะห์<br>
+                ครูจะติดต่อกลับไปในเร็วๆ นี้ค่ะ</p>
+            </div>
+
+            <!-- ปุ่มดำเนินการ -->
+            <div class="action-buttons" id="actionButtons">
+                <button class="btn btn-submit" onclick="submitTest()" id="submitBtn">
+                    ✅ ส่งข้อสอบ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลข้อสอบ ป.6 ตาม Spiral Skills
+        const questions = [
+
+            // ===== กลุ่มที่ 1: ตัวประกอบและจำนวนเฉพาะ - ข้อ 1-8 =====
+            {
+                skill: 'prime-factor-1',
+                q: 'ข้อใดเป็นจำนวนเฉพาะ?',
+                type: 'choice',
+                choices: ['9', '15', '17', '21'],
+                answer: 2
+            },
+            {
+                skill: 'prime-factor-1',
+                q: 'ตัวประกอบทั้งหมดของ 12 มีกี่ตัว?',
+                type: 'choice',
+                choices: ['4 ตัว', '5 ตัว', '6 ตัว', '7 ตัว'],
+                answer: 2
+            },
+            {
+                skill: 'prime-factor-1',
+                q: 'ข้อใดไม่ใช่จำนวนเฉพาะ?',
+                type: 'choice',
+                choices: ['7', '11', '13', '15'],
+                answer: 3
+            },
+            {
+                skill: 'prime-factor-1',
+                q: '24 = 2 × 2 × 2 × ? การแยกตัวประกอบของ 24 ที่สมบูรณ์คือข้อใด?',
+                type: 'choice',
+                choices: ['2³ × 3', '2² × 6', '2 × 12', '4 × 6'],
+                answer: 0
+            },
+            {
+                skill: 'prime-factor-1',
+                q: 'จำนวนเฉพาะระหว่าง 20 ถึง 30 มีกี่จำนวน?',
+                type: 'choice',
+                choices: ['1 จำนวน', '2 จำนวน', '3 จำนวน', '4 จำนวน'],
+                answer: 1
+            },
+            {
+                skill: 'prime-factor-1',
+                q: 'การแยกตัวประกอบของ 36 คือข้อใด?',
+                type: 'choice',
+                choices: ['2² × 3²', '2 × 18', '4 × 9', '6 × 6'],
+                answer: 0
+            },
+            {
+                skill: 'prime-factor-1',
+                q: 'ตัวประกอบของ 18 คือข้อใด?',
+                type: 'choice',
+                choices: [
+                    '1, 2, 3, 6, 9, 18',
+                    '1, 2, 4, 9, 18',
+                    '2, 3, 6, 9',
+                    '1, 3, 6, 9, 18'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'prime-factor-1',
+                q: '48 แยกตัวประกอบได้เป็นข้อใด?',
+                type: 'choice',
+                choices: ['2⁴ × 3', '2³ × 6', '2² × 12', '2 × 24'],
+                answer: 0
+            },
+
+            // ===== กลุ่มที่ 2: ห.ร.ม. และ ค.ร.น. - ข้อ 9-18 =====
+            {
+                skill: 'hcf-lcm-1',
+                q: 'ห.ร.ม. ของ 12 และ 18 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '6'
+            },
+            {
+                skill: 'hcf-lcm-1',
+                q: 'ค.ร.น. ของ 4 และ 6 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '12'
+            },
+            {
+                skill: 'hcf-lcm-1',
+                q: 'ห.ร.ม. ของ 24 และ 36 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['6', '8', '12', '18'],
+                answer: 2
+            },
+            {
+                skill: 'hcf-lcm-1',
+                q: 'ค.ร.น. ของ 3, 4 และ 6 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['6', '12', '18', '24'],
+                answer: 1
+            },
+            {
+                skill: 'hcf-lcm-2',
+                q: 'นำเชือก 2 เส้น ยาว 18 เมตร และ 24 เมตร มาตัดเป็นท่อนสั้นๆ ให้ยาวเท่ากันทุกท่อน โดยไม่ให้เหลือเศษ แต่ละท่อนยาวได้มากที่สุดกี่เมตร?',
+                type: 'input',
+                answer: '6'
+            },
+            {
+                skill: 'hcf-lcm-2',
+                q: 'รถประจำทางสาย ก ออกทุก 12 นาที สาย ข ออกทุก 18 นาที ออกพร้อมกันแล้วจะออกพร้อมกันอีกครั้งใน กี่นาที?',
+                type: 'input',
+                answer: '36'
+            },
+            {
+                skill: 'hcf-lcm-1',
+                q: 'ห.ร.ม. ของ 45 และ 60 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['5', '10', '15', '20'],
+                answer: 2
+            },
+            {
+                skill: 'hcf-lcm-1',
+                q: 'ค.ร.น. ของ 6 และ 8 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['16', '24', '32', '48'],
+                answer: 1
+            },
+            {
+                skill: 'hcf-lcm-2',
+                q: 'มีดอกไม้สีแดง 30 ดอก สีขาว 45 ดอก นำมาจัดช่อให้แต่ละช่อมีดอกไม้สีเดียวกันจำนวนเท่ากัน และได้จำนวนช่อมากที่สุด แต่ละช่อมีดอกไม้กี่ดอก?',
+                type: 'choice',
+                choices: ['5 ดอก', '10 ดอก', '15 ดอก', '20 ดอก'],
+                answer: 2
+            },
+            {
+                skill: 'hcf-lcm-2',
+                q: 'ผู้ชายคนหนึ่งวิ่งรอบสนาม ถ้าเขาวิ่งรอบที่ 1 ใช้เวลา 4 นาที รอบที่ 2 ใช้เวลา 6 นาที และรอบที่ 3 ใช้เวลา 9 นาที เขาเริ่มวิ่งพร้อมกันทุกรอบครั้งแรกเวลาใด (ค.ร.น. ของ 4, 6, 9)?',
+                type: 'choice',
+                choices: ['18 นาที', '24 นาที', '36 นาที', '48 นาที'],
+                answer: 2
+            },
+
+            // ===== กลุ่มที่ 3: เศษส่วนและจำนวนคละ Level 8 (บวก ลบ คูณ หาร ใช้ ค.ร.น.) - ข้อ 19-28 =====
+            {
+                skill: 'fraction-8',
+                q: '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span> + <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">7</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> - <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">8</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: '<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span> × <span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">5</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">5</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">8</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">6</span><span class="fraction-denominator">15</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> ÷ <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">8</span></span>',
+                    '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>',
+                    '2',
+                    '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">2</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'fraction-8',
+                q: '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span> + 1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '3<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">12</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">7</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">12</span></span>',
+                    '4'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: '3<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> - 1<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '1<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">6</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span>',
+                    '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">6</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: 'ซื้อน้ำมัน 2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> ลิตร ใช้ไป 1<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> ลิตร เหลือน้ำมันกี่ลิตร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> ลิตร',
+                    '1 ลิตร',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> ลิตร',
+                    '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> ลิตร'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">6</span></span> × 3 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">2</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">6</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'fraction-8',
+                q: '(<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> + <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span>) × <span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">5</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">10</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">10</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-8',
+                q: 'แบ่งเค้ก <span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> ของก้อนให้เพื่อน 3 คนเท่า ๆ กัน แต่ละคนได้เค้กกี่ส่วน?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">9</span><span class="fraction-denominator">4</span></span>'
+                ],
+                answer: 0
+            },
+
+            // ===== กลุ่มที่ 4: อัตราส่วนและมาตราส่วน - ข้อ 29-36 =====
+            {
+                skill: 'ratio-1',
+                q: 'ถ้าส้ม 3 ผล ราคา 15 บาท ส้ม 9 ผล ราคาเท่าไร?',
+                type: 'input',
+                answer: '45'
+            },
+            {
+                skill: 'ratio-1',
+                q: 'อัตราส่วนของนักเรียนชาย 12 คน ต่อนักเรียนหญิง 16 คน อยู่ในรูปอย่างต่ำคือข้อใด?',
+                type: 'choice',
+                choices: ['12 : 16', '6 : 8', '3 : 4', '4 : 3'],
+                answer: 2
+            },
+            {
+                skill: 'ratio-1',
+                q: 'ถ้า ก : ข = 2 : 3 และ ก = 10 แล้ว ข มีค่าเท่าไร?',
+                type: 'input',
+                answer: '15'
+            },
+            {
+                skill: 'ratio-2',
+                q: 'แผนที่มีมาตราส่วน 1 : 50,000 ระยะในแผนที่ 3 cm ระยะจริงเป็นกี่เมตร?',
+                type: 'choice',
+                choices: ['1,500 m', '15,000 m', '150,000 m', '1,500,000 m'],
+                answer: 0
+            },
+            {
+                skill: 'ratio-2',
+                q: 'แผนที่มาตราส่วน 1 : 100,000 ถ้าระยะจริงระหว่างสองเมือง 50 km ระยะในแผนที่เป็นกี่ cm?',
+                type: 'choice',
+                choices: ['5 cm', '50 cm', '500 cm', '0.5 cm'],
+                answer: 1
+            },
+            {
+                skill: 'ratio-1',
+                q: 'น้ำส้มเข้มข้นผสมน้ำในอัตราส่วน 1 : 4 ถ้าใช้น้ำส้ม 2 ส่วน ต้องใช้น้ำกี่ส่วน?',
+                type: 'input',
+                answer: '8'
+            },
+            {
+                skill: 'ratio-1',
+                q: 'กาแฟดำ 150 mL ผสมนม 50 mL อัตราส่วนกาแฟต่อนมในรูปอย่างต่ำคือข้อใด?',
+                type: 'choice',
+                choices: ['150 : 50', '3 : 2', '3 : 1', '2 : 1'],
+                answer: 2
+            },
+            {
+                skill: 'ratio-2',
+                q: 'ห้องสมุดกว้าง 8 m ยาว 12 m วาดในแผนผังมาตราส่วน 1 : 200 ในแผนผังมีขนาดกี่ cm × กี่ cm?',
+                type: 'choice',
+                choices: ['4 cm × 6 cm', '40 cm × 60 cm', '0.4 cm × 0.6 cm', '8 cm × 12 cm'],
+                answer: 0
+            },
+
+            // ===== กลุ่มที่ 5: ร้อยละ Level 3 (ซับซ้อน) - ข้อ 37-44 =====
+            {
+                skill: 'percent-3',
+                q: 'ซื้อโทรศัพท์ราคา 12,000 บาท ลดราคา 15% จ่ายเงินจริงเท่าไร?',
+                type: 'input',
+                answer: '10200'
+            },
+            {
+                skill: 'percent-3',
+                q: 'ฝากเงิน 5,000 บาท ดอกเบี้ย 4% ต่อปี ครบ 2 ปี ได้ดอกเบี้ยทั้งหมดเท่าไร?',
+                type: 'choice',
+                choices: ['200 บาท', '300 บาท', '400 บาท', '500 บาท'],
+                answer: 2
+            },
+            {
+                skill: 'percent-3',
+                q: 'ต้นทุนสินค้า 800 บาท ขายได้กำไร 25% ราคาขายเท่าไร?',
+                type: 'input',
+                answer: '1000'
+            },
+            {
+                skill: 'percent-3',
+                q: 'นักเรียนสอบผ่าน 63 คน จากทั้งหมด 70 คน คิดเป็นร้อยละเท่าไร?',
+                type: 'choice',
+                choices: ['80%', '85%', '90%', '95%'],
+                answer: 2
+            },
+            {
+                skill: 'percent-3',
+                q: 'ราคาบ้านเดิม 2,000,000 บาท ราคาเพิ่มขึ้น 8% ราคาใหม่เท่าไร?',
+                type: 'choice',
+                choices: ['2,080,000 บาท', '2,160,000 บาท', '2,160,000 บาท', '2,200,000 บาท'],
+                answer: 1
+            },
+            {
+                skill: 'percent-3',
+                q: 'สินค้าราคา 450 บาท ขายในราคา 360 บาท ลดราคากี่เปอร์เซ็นต์?',
+                type: 'choice',
+                choices: ['15%', '20%', '25%', '30%'],
+                answer: 1
+            },
+            {
+                skill: 'percent-3',
+                q: 'เด็กหญิงมีเงิน 2,500 บาท ใช้ไป 40% เหลือเงินเท่าไร?',
+                type: 'input',
+                answer: '1500'
+            },
+            {
+                skill: 'percent-3',
+                q: 'น้ำหนักเพิ่มจาก 40 kg เป็น 44 kg คิดเป็นร้อยละเพิ่มขึ้นเท่าไร?',
+                type: 'choice',
+                choices: ['4%', '8%', '10%', '12%'],
+                answer: 2
+            },
+
+            // ===== กลุ่มที่ 6: แบบรูปซับซ้อน Level 5 - ข้อ 45-48 =====
+            {
+                skill: 'pattern-5',
+                q: '1, 4, 9, 16, 25, ___ ตัวถัดไปคือเท่าไร?',
+                type: 'input',
+                answer: '36'
+            },
+            {
+                skill: 'pattern-5',
+                q: '2, 6, 18, 54, ___ ตัวถัดไปคือเท่าไร?',
+                type: 'input',
+                answer: '162'
+            },
+            {
+                skill: 'pattern-5',
+                q: '1, 1, 2, 3, 5, 8, ___ ตัวถัดไปคือเท่าไร?',
+                type: 'input',
+                answer: '13'
+            },
+            {
+                skill: 'pattern-5',
+                q: 'รูปสามเหลี่ยมที่ต่อกันเป็นแถว รูปที่ 1 มี 1 สามเหลี่ยม รูปที่ 2 มี 4 รูปที่ 3 มี 9 รูปที่ 6 มีสี่เหลี่ยมกี่รูป?',
+                type: 'input',
+                answer: '36'
+            },
+
+            // ===== กลุ่มที่ 7: รูปสามเหลี่ยม ชนิด สมบัติ การสร้าง - ข้อ 49-56 =====
+            {
+                skill: 'triangle-6',
+                q: 'รูปใดเป็นรูปสามเหลี่ยมด้านเท่า?',
+                type: 'choice',
+                choices: ['รูป ก', 'รูป ข', 'รูป ค', 'รูป ง'],
+                answer: 0,
+                image: 'triangles-types'
+            },
+            {
+                skill: 'triangle-6',
+                q: 'รูปสามเหลี่ยมมีด้านยาว 5 cm, 5 cm, 8 cm เป็นสามเหลี่ยมชนิดใด?',
+                type: 'choice',
+                choices: ['ด้านเท่า', 'หน้าจั่ว', 'ด้านไม่เท่า', 'มุมฉาก'],
+                answer: 1
+            },
+            {
+                skill: 'triangle-6',
+                q: 'รูปสามเหลี่ยมมุมฉากมีมุมฉากกี่มุม?',
+                type: 'choice',
+                choices: ['1 มุม', '2 มุม', '3 มุม', 'ไม่มีมุมฉาก'],
+                answer: 0
+            },
+            {
+                skill: 'triangle-6',
+                q: 'สามเหลี่ยมด้านเท่ามีมุมภายในแต่ละมุมเท่ากับกี่องศา?',
+                type: 'input',
+                answer: '60'
+            },
+            {
+                skill: 'triangle-6',
+                q: 'รูปสามเหลี่ยมที่มีมุมมากกว่า 90° เรียกว่าสามเหลี่ยมชนิดใด?',
+                type: 'choice',
+                choices: ['สามเหลี่ยมมุมฉาก', 'สามเหลี่ยมมุมแหลม', 'สามเหลี่ยมมุมป้าน', 'สามเหลี่ยมหน้าจั่ว'],
+                answer: 2
+            },
+            {
+                skill: 'triangle-6',
+                q: 'รูปจากโจทย์เป็นสามเหลี่ยมชนิดใด?',
+                type: 'choice',
+                choices: ['ด้านเท่า', 'หน้าจั่ว', 'ด้านไม่เท่า', 'มุมฉาก'],
+                answer: 3,
+                image: 'right-triangle'
+            },
+            {
+                skill: 'triangle-6',
+                q: 'สามเหลี่ยมหน้าจั่วมีสมบัติข้อใด?',
+                type: 'choice',
+                choices: [
+                    'ด้านทั้ง 3 ด้านยาวเท่ากัน',
+                    'ด้าน 2 ด้านยาวเท่ากัน มุมฐาน 2 มุมเท่ากัน',
+                    'มีมุมฉาก 1 มุม',
+                    'มุมทุกมุมเท่ากัน'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'triangle-6',
+                q: 'รูปสามเหลี่ยมมุมแหลมทุกมุมของสามเหลี่ยมต้องมีขนาดกี่องศา?',
+                type: 'choice',
+                choices: ['น้อยกว่า 90°', 'เท่ากับ 90°', 'มากกว่า 90°', 'เท่ากับ 180°'],
+                answer: 0
+            },
+
+            // ===== กลุ่มที่ 8: พื้นที่สามเหลี่ยมและหลายเหลี่ยม - ข้อ 57-64 =====
+            {
+                skill: 'area-3',
+                q: 'รูปสามเหลี่ยมมีฐาน 10 cm สูง 6 cm มีพื้นที่เท่าไร?',
+                type: 'input',
+                answer: '30'
+            },
+            {
+                skill: 'area-3',
+                q: 'รูปสามเหลี่ยมมีพื้นที่ 48 cm² สูง 8 cm ฐานยาวเท่าไร?',
+                type: 'input',
+                answer: '12'
+            },
+            {
+                skill: 'area-3',
+                q: 'รูปในโจทย์มีพื้นที่เท่าไร?',
+                type: 'choice',
+                choices: ['24 cm²', '30 cm²', '36 cm²', '48 cm²'],
+                answer: 0,
+                image: 'triangle-area-q'
+            },
+            {
+                skill: 'area-4',
+                q: 'รูปหลายเหลี่ยมด้านเท่า (รูปหกเหลี่ยมสม่ำเสมอ) แบ่งเป็นสามเหลี่ยม 6 รูป แต่ละรูปมีพื้นที่ 12 cm² รูปหกเหลี่ยมมีพื้นที่เท่าไร?',
+                type: 'input',
+                answer: '72'
+            },
+            {
+                skill: 'area-5',
+                q: 'วงกลมมีรัศมี 7 cm มีพื้นที่เท่าไร? (π = 3.14)',
+                type: 'choice',
+                choices: ['43.96 cm²', '153.86 cm²', '87.92 cm²', '44 cm²'],
+                answer: 1
+            },
+            {
+                skill: 'area-5',
+                q: 'วงกลมมีเส้นผ่านศูนย์กลาง 10 cm มีพื้นที่เท่าไร? (π = 3.14)',
+                type: 'input',
+                answer: '78.5'
+            },
+            {
+                skill: 'area-5',
+                q: 'วงกลมมีพื้นที่ 314 cm² รัศมีเท่าไร? (π = 3.14)',
+                type: 'choice',
+                choices: ['5 cm', '10 cm', '15 cm', '20 cm'],
+                answer: 1
+            },
+            {
+                skill: 'area-3',
+                q: 'รูปบ้านประกอบด้วยรูปสี่เหลี่ยมผืนผ้า 6 m × 4 m และสามเหลี่ยมมีฐาน 6 m สูง 3 m มีพื้นที่รวมเท่าไร?',
+                type: 'choice',
+                choices: ['30 m²', '33 m²', '36 m²', '39 m²'],
+                answer: 1
+            },
+
+            // ===== กลุ่มที่ 9: ความยาวรอบรูปวงกลมและหลายเหลี่ยม - ข้อ 65-68 =====
+            {
+                skill: 'perimeter-3',
+                q: 'วงกลมมีรัศมี 5 cm มีเส้นรอบวงเท่าไร? (π = 3.14)',
+                type: 'input',
+                answer: '31.4'
+            },
+            {
+                skill: 'perimeter-3',
+                q: 'วงกลมมีเส้นผ่านศูนย์กลาง 14 cm มีเส้นรอบวงเท่าไร? (π = 22/7)',
+                type: 'choice',
+                choices: ['22 cm', '44 cm', '88 cm', '154 cm'],
+                answer: 1
+            },
+            {
+                skill: 'perimeter-3',
+                q: 'รูปหกเหลี่ยมสม่ำเสมอมีด้านยาว 8 cm มีความยาวรอบรูปเท่าไร?',
+                type: 'input',
+                answer: '48'
+            },
+            {
+                skill: 'perimeter-3',
+                q: 'สนามกลมมีเส้นรอบวง 62.8 m รัศมีเท่าไร? (π = 3.14)',
+                type: 'choice',
+                choices: ['5 m', '10 m', '20 m', '40 m'],
+                answer: 1
+            },
+
+            // ===== กลุ่มที่ 10: มุมภายในรูปหลายเหลี่ยม - ข้อ 69-72 =====
+            {
+                skill: 'angle-3',
+                q: 'มุมภายในรูปสี่เหลี่ยมทุกรูปรวมกันได้กี่องศา?',
+                type: 'input',
+                answer: '360'
+            },
+            {
+                skill: 'angle-3',
+                q: 'มุมภายในรูปห้าเหลี่ยมรวมกันได้กี่องศา?',
+                type: 'choice',
+                choices: ['360°', '450°', '540°', '720°'],
+                answer: 2
+            },
+            {
+                skill: 'angle-3',
+                q: 'มุมภายในรูปหกเหลี่ยมรวมกันได้กี่องศา?',
+                type: 'choice',
+                choices: ['540°', '720°', '900°', '1080°'],
+                answer: 1
+            },
+            {
+                skill: 'angle-3',
+                q: 'รูปหลายเหลี่ยมมีมุมภายในรวม 1,080° เป็นรูปกี่เหลี่ยม?',
+                type: 'choice',
+                choices: ['หกเหลี่ยม', 'เจ็ดเหลี่ยม', 'แปดเหลี่ยม', 'เก้าเหลี่ยม'],
+                answer: 2
+            },
+
+            // ===== กลุ่มที่ 11: รูปเรขาคณิต 3 มิติ รูปคลี่ Level 3 - ข้อ 73-80 =====
+            {
+                skill: 'solid-3',
+                q: 'รูปคลี่ข้อใดเป็นรูปคลี่ของทรงกระบอก?',
+                type: 'choice',
+                choices: ['รูป ก', 'รูป ข', 'รูป ค', 'รูป ง'],
+                answer: 1,
+                image: 'nets-3d'
+            },
+            {
+                skill: 'solid-3',
+                q: 'ทรงกระบอกมีหน้าทั้งหมดกี่หน้า?',
+                type: 'choice',
+                choices: ['1 หน้า', '2 หน้า', '3 หน้า', '4 หน้า'],
+                answer: 2
+            },
+            {
+                skill: 'solid-3',
+                q: 'รูปคลี่ของกรวยประกอบด้วยรูปอะไร?',
+                type: 'choice',
+                choices: [
+                    'วงกลม 1 รูป และสี่เหลี่ยม 1 รูป',
+                    'วงกลม 2 รูป',
+                    'วงกลม 1 รูป และส่วนของวงกลม (扇形) 1 รูป',
+                    'สามเหลี่ยม 3 รูป'
+                ],
+                answer: 2
+            },
+            {
+                skill: 'solid-3',
+                q: 'พีระมิดสี่เหลี่ยมมีหน้ากี่หน้า?',
+                type: 'choice',
+                choices: ['4 หน้า', '5 หน้า', '6 หน้า', '8 หน้า'],
+                answer: 1
+            },
+            {
+                skill: 'solid-3',
+                q: 'ปริซึมสามเหลี่ยมมีขอบทั้งหมดกี่ขอบ?',
+                type: 'choice',
+                choices: ['6 ขอบ', '9 ขอบ', '12 ขอบ', '15 ขอบ'],
+                answer: 1
+            },
+            {
+                skill: 'solid-3',
+                q: 'รูปในโจทย์เป็นรูปคลี่ของรูปทรงใด?',
+                type: 'choice',
+                choices: ['ทรงกระบอก', 'กรวย', 'พีระมิดสามเหลี่ยม', 'ปริซึมสามเหลี่ยม'],
+                answer: 3,
+                image: 'net-prism'
+            },
+            {
+                skill: 'solid-3',
+                q: 'พีระมิดสามเหลี่ยมมีจุดยอดทั้งหมดกี่จุด?',
+                type: 'choice',
+                choices: ['3 จุด', '4 จุด', '5 จุด', '6 จุด'],
+                answer: 1
+            },
+            {
+                skill: 'solid-3',
+                q: 'ทรงกระบอกมีขอบทั้งหมดกี่ขอบ?',
+                type: 'choice',
+                choices: ['0 ขอบ', '2 ขอบ', '3 ขอบ', '4 ขอบ'],
+                answer: 1
+            },
+
+            // ===== กลุ่มที่ 12: ปริมาตร 3 มิติผสม - ข้อ 81-84 =====
+            {
+                skill: 'volume-4',
+                q: 'รูปทรงประกอบด้วยทรงสี่เหลี่ยมมุมฉาก 2 ก้อน ก้อนแรก 4×3×2 cm³ ก้อนที่สอง 2×2×2 cm³ ปริมาตรรวมเท่าไร?',
+                type: 'choice',
+                choices: ['24 cm³', '30 cm³', '32 cm³', '40 cm³'],
+                answer: 2
+            },
+            {
+                skill: 'volume-4',
+                q: 'ห้องรูปตัว L มีส่วน A กว้าง 5 m ยาว 8 m สูง 3 m และส่วน B กว้าง 3 m ยาว 4 m สูง 3 m ปริมาตรรวมเท่าไร?',
+                type: 'choice',
+                choices: ['120 m³', '156 m³', '196 m³', '216 m³'],
+                answer: 1
+            },
+            {
+                skill: 'volume-4',
+                q: 'สระว่ายน้ำรูปสี่เหลี่ยมผืนผ้า กว้าง 10 m ยาว 25 m ลึก 2 m บรรจุน้ำได้กี่ลิตร?',
+                type: 'choice',
+                choices: ['50,000 ลิตร', '500,000 ลิตร', '5,000,000 ลิตร', '50 ลิตร'],
+                answer: 1
+            },
+            {
+                skill: 'volume-4',
+                q: 'กล่องใหญ่ภายนอก กว้าง 10 cm ยาว 10 cm สูง 10 cm มีผนังหนา 1 cm ปริมาตรข้างในเท่าไร?',
+                type: 'choice',
+                choices: ['512 cm³', '729 cm³', '800 cm³', '1000 cm³'],
+                answer: 0
+            },
+
+            // ===== กลุ่มที่ 13: แผนภูมิรูปวงกลม Level 7 - ข้อ 85-92 =====
+            {
+                skill: 'chart-7',
+                q: 'จากแผนภูมิวงกลม กิจกรรมใดใช้เวลามากที่สุด?',
+                type: 'choice',
+                choices: ['นอนหลับ', 'เรียนหนังสือ', 'เล่น', 'ทำการบ้าน'],
+                answer: 0,
+                image: 'pie-chart-time'
+            },
+            {
+                skill: 'chart-7',
+                q: 'จากแผนภูมิข้อที่แล้ว ถ้า 1 วันมี 24 ชั่วโมง นอนหลับใช้เวลากี่ชั่วโมง?',
+                type: 'choice',
+                choices: ['6 ชั่วโมง', '8 ชั่วโมง', '10 ชั่วโมง', '12 ชั่วโมง'],
+                answer: 1
+            },
+            {
+                skill: 'chart-7',
+                q: 'จากแผนภูมิข้อที่แล้ว เรียนหนังสือและทำการบ้านรวมกันคิดเป็นกี่เปอร์เซ็นต์?',
+                type: 'choice',
+                choices: ['25%', '30%', '35%', '40%'],
+                answer: 2
+            },
+            {
+                skill: 'chart-7',
+                q: 'จากแผนภูมิวงกลมแสดงผลไม้ที่ขายได้ มะม่วงขายได้กี่กิโลกรัม?',
+                type: 'choice',
+                choices: ['15 kg', '20 kg', '25 kg', '30 kg'],
+                answer: 2,
+                image: 'pie-chart-fruit'
+            },
+            {
+                skill: 'chart-7',
+                q: 'จากแผนภูมิข้อที่แล้ว ผลไม้ทั้งหมดขายได้กี่กิโลกรัม?',
+                type: 'input',
+                answer: '100'
+            },
+            {
+                skill: 'chart-7',
+                q: 'จากแผนภูมิข้อที่แล้ว มะม่วงขายได้กี่เปอร์เซ็นต์ของทั้งหมด?',
+                type: 'choice',
+                choices: ['20%', '25%', '30%', '35%'],
+                answer: 1
+            },
+            {
+                skill: 'chart-7',
+                q: 'แผนภูมิวงกลมเหมาะกับการแสดงข้อมูลประเภทใด?',
+                type: 'choice',
+                choices: [
+                    'ข้อมูลที่เปลี่ยนแปลงตามเวลา',
+                    'สัดส่วนของข้อมูลทั้งหมด',
+                    'ข้อมูลที่เปรียบเทียบปริมาณ',
+                    'ข้อมูลต่อเนื่อง'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'chart-7',
+                q: 'มุมในแผนภูมิวงกลมทั้งหมดรวมกันได้กี่องศา?',
+                type: 'input',
+                answer: '360'
+            },
+
+            // ===== กลุ่มที่ 14: ทบทวนและประยุกต์รวม - ข้อ 93-100 =====
+            {
+                skill: 'hcf-lcm-2',
+                q: 'ตัดริบบิ้น 2 ม้วน ยาว 32 m และ 48 m ให้ได้ชิ้นยาวเท่ากันและยาวที่สุด แต่ละชิ้นยาวกี่เมตร?',
+                type: 'input',
+                answer: '16'
+            },
+            {
+                skill: 'area-5',
+                q: 'วงกลม 2 วง วงในรัศมี 3 cm วงนอกรัศมี 5 cm พื้นที่ระหว่างวงกลมทั้งสองเท่าไร? (π = 3.14)',
+                type: 'choice',
+                choices: ['28.26 cm²', '50.24 cm²', '78.5 cm²', '56.52 cm²'],
+                answer: 1
+            },
+            {
+                skill: 'fraction-8',
+                q: '1 - <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span> - <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'percent-3',
+                q: 'ซื้อรองเท้าราคา 1,200 บาท ลด 15% และเสื้อราคา 800 บาท ลด 10% จ่ายเงินรวมทั้งหมดเท่าไร?',
+                type: 'choice',
+                choices: ['1,700 บาท', '1,740 บาท', '1,750 บาท', '1,800 บาท'],
+                answer: 1
+            },
+            {
+                skill: 'ratio-1',
+                q: 'สีน้ำเงิน : สีเหลือง = 3 : 2 ถ้าใช้สีน้ำเงิน 450 mL ต้องใช้สีเหลืองกี่ mL?',
+                type: 'input',
+                answer: '300'
+            },
+            {
+                skill: 'angle-3',
+                q: 'รูปห้าเหลี่ยมสม่ำเสมอ มุมภายในแต่ละมุมมีขนาดเท่าไร?',
+                type: 'choice',
+                choices: ['100°', '108°', '110°', '120°'],
+                answer: 1
+            },
+            {
+                skill: 'volume-4',
+                q: 'บ่อน้ำรูปสี่เหลี่ยมผืนผ้า กว้าง 4 m ยาว 6 m ลึก 1.5 m บรรจุน้ำเต็มได้กี่ลูกบาศก์เมตร?',
+                type: 'input',
+                answer: '36'
+            },
+            {
+                skill: 'prime-factor-1',
+                q: 'จำนวนเฉพาะที่อยู่ระหว่าง 40 ถึง 60 มีกี่จำนวน?',
+                type: 'choice',
+                choices: ['3 จำนวน', '4 จำนวน', '5 จำนวน', '6 จำนวน'],
+                answer: 1
+            }
+        ];
+
+        // ฟังก์ชันสร้างรูปภาพ SVG
+        function generateImage(imageType) {
+            const images = {
+
+                // ===== รูปสามเหลี่ยมชนิดต่างๆ =====
+                'triangles-types': `
+                    <svg viewBox="0 0 460 130" xmlns="http://www.w3.org/2000/svg" width="460">
+                        <text x="10" y="15" font-size="14" font-weight="bold">ก.</text>
+                        <polygon points="60,15 15,110 105,110" fill="#4caf50" opacity="0.3" stroke="#2e7d32" stroke-width="2"/>
+
+                        <text x="130" y="15" font-size="14" font-weight="bold">ข.</text>
+                        <polygon points="185,15 140,110 230,110" fill="#2196f3" opacity="0.3" stroke="#1565c0" stroke-width="2"/>
+
+                        <text x="255" y="15" font-size="14" font-weight="bold">ค.</text>
+                        <polygon points="265,110 355,110 265,30" fill="#ff9800" opacity="0.3" stroke="#e65100" stroke-width="2"/>
+                        <rect x="265" y="90" width="18" height="18" fill="none" stroke="#e65100" stroke-width="1.5"/>
+
+                        <text x="375" y="15" font-size="14" font-weight="bold">ง.</text>
+                        <polygon points="395,15 365,110 450,110" fill="#9c27b0" opacity="0.3" stroke="#6a1b9a" stroke-width="2"/>
+                    </svg>
+                `,
+
+                // ===== สามเหลี่ยมมุมฉาก =====
+                'right-triangle': `
+                    <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" width="200">
+                        <polygon points="20,130 20,20 160,130" fill="#e91e63" opacity="0.25" stroke="#880e4f" stroke-width="2.5"/>
+                        <rect x="20" y="112" width="18" height="18" fill="none" stroke="#880e4f" stroke-width="2"/>
+                        <text x="5" y="148" font-size="13">6 cm</text>
+                        <text x="75" y="148" font-size="13">8 cm</text>
+                        <text x="55" y="70" font-size="13">10 cm</text>
+                    </svg>
+                `,
+
+                // ===== พื้นที่สามเหลี่ยมจากโจทย์ =====
+                'triangle-area-q': `
+                    <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" width="220">
+                        <polygon points="110,15 20,135 200,135" fill="#3f51b5" opacity="0.25" stroke="#283593" stroke-width="2.5"/>
+                        <line x1="110" y1="15" x2="110" y2="135" stroke="#283593" stroke-width="1.5" stroke-dasharray="5,3"/>
+                        <text x="115" y="82" font-size="13">8 cm</text>
+                        <text x="80" y="152" font-size="13">12 cm</text>
+                    </svg>
+                `,
+
+                // ===== รูปคลี่ 3 มิติ หลายรูป =====
+                'nets-3d': `
+                    <svg viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg" width="480">
+                        <!-- ก: รูปคลี่พีระมิดสี่เหลี่ยม (ไม่ใช่กระบอก) -->
+                        <text x="5" y="15" font-size="13" font-weight="bold">ก.</text>
+                        <rect x="25" y="60" width="50" height="50" fill="#4caf50" opacity="0.3" stroke="#2e7d32" stroke-width="1.5"/>
+                        <polygon points="25,60 50,30 75,60" fill="#4caf50" opacity="0.3" stroke="#2e7d32" stroke-width="1.5"/>
+                        <polygon points="75,60 100,80 75,110" fill="#4caf50" opacity="0.3" stroke="#2e7d32" stroke-width="1.5"/>
+                        <polygon points="25,110 50,135 75,110" fill="#4caf50" opacity="0.3" stroke="#2e7d32" stroke-width="1.5"/>
+                        <polygon points="25,60 0,80 25,110" fill="#4caf50" opacity="0.3" stroke="#2e7d32" stroke-width="1.5"/>
+
+                        <!-- ข: รูปคลี่ทรงกระบอก (วงกลม 2 วง + สี่เหลี่ยมผืนผ้า) -->
+                        <text x="125" y="15" font-size="13" font-weight="bold">ข.</text>
+                        <ellipse cx="175" cy="45" rx="30" ry="12" fill="#2196f3" opacity="0.3" stroke="#1565c0" stroke-width="1.5"/>
+                        <rect x="145" y="55" width="60" height="65" fill="#2196f3" opacity="0.3" stroke="#1565c0" stroke-width="1.5"/>
+                        <ellipse cx="175" cy="120" rx="30" ry="12" fill="#2196f3" opacity="0.3" stroke="#1565c0" stroke-width="1.5"/>
+
+                        <!-- ค: รูปคลี่กรวย -->
+                        <text x="250" y="15" font-size="13" font-weight="bold">ค.</text>
+                        <ellipse cx="305" cy="125" rx="38" ry="14" fill="#ff9800" opacity="0.3" stroke="#e65100" stroke-width="1.5"/>
+                        <path d="M267,125 Q275,55 305,30 Q335,55 343,125" fill="#ff9800" opacity="0.3" stroke="#e65100" stroke-width="1.5"/>
+
+                        <!-- ง: รูปคลี่พีระมิดสามเหลี่ยม -->
+                        <text x="370" y="15" font-size="13" font-weight="bold">ง.</text>
+                        <polygon points="415,20 380,110 450,110" fill="#9c27b0" opacity="0.3" stroke="#6a1b9a" stroke-width="1.5"/>
+                        <polygon points="380,110 415,130 450,110" fill="#9c27b0" opacity="0.3" stroke="#6a1b9a" stroke-width="1.5"/>
+                        <polygon points="380,110 355,130 415,130" fill="#9c27b0" opacity="0.3" stroke="#6a1b9a" stroke-width="1.5"/>
+                        <polygon points="450,110 415,130 460,145" fill="#9c27b0" opacity="0.3" stroke="#6a1b9a" stroke-width="1.5"/>
+                    </svg>
+                `,
+
+                // ===== รูปคลี่ปริซึมสามเหลี่ยม =====
+                'net-prism': `
+                    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" width="300">
+                        <!-- ฐานสามเหลี่ยม 2 รูป -->
+                        <polygon points="80,20 20,100 140,100" fill="#009688" opacity="0.3" stroke="#004d40" stroke-width="2"/>
+                        <polygon points="80,180 20,100 140,100" fill="#009688" opacity="0.3" stroke="#004d40" stroke-width="2"/>
+                        <!-- สี่เหลี่ยมผืนผ้า 3 รูป -->
+                        <rect x="140" y="30" width="60" height="70" fill="#009688" opacity="0.25" stroke="#004d40" stroke-width="2"/>
+                        <rect x="140" y="100" width="60" height="70" fill="#009688" opacity="0.2" stroke="#004d40" stroke-width="2"/>
+                        <rect x="200" y="30" width="60" height="70" fill="#009688" opacity="0.15" stroke="#004d40" stroke-width="2"/>
+                    </svg>
+                `,
+
+                // ===== แผนภูมิวงกลม - การใช้เวลา =====
+                'pie-chart-time': `
+                    <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400">
+                        <text x="200" y="20" text-anchor="middle" font-size="15" font-weight="bold">การใช้เวลาใน 1 วัน</text>
+                        <!-- วงกลม radius=100 center=(160,155) -->
+                        <!-- นอนหลับ 33% ≈ 120° → 0 ถึง 120° -->
+                        <path d="M160,155 L260,155 A100,100 0 0,1 110,242 Z" fill="#3f51b5" opacity="0.75"/>
+                        <!-- เรียนหนังสือ 25% ≈ 90° → 120° ถึง 210° -->
+                        <path d="M160,155 L110,242 A100,100 0 0,1 73,105 Z" fill="#f44336" opacity="0.75"/>
+                        <!-- เล่น 22% ≈ 79° → 210° ถึง 289° -->
+                        <path d="M160,155 L73,105 A100,100 0 0,1 193,56 Z" fill="#ff9800" opacity="0.75"/>
+                        <!-- ทำการบ้าน 10% ≈ 36° → 289° ถึง 325° -->
+                        <path d="M160,155 L193,56 A100,100 0 0,1 242,73 Z" fill="#4caf50" opacity="0.75"/>
+                        <!-- อื่นๆ 10% ≈ 35° → 325° ถึง 360° -->
+                        <path d="M160,155 L242,73 A100,100 0 0,1 260,155 Z" fill="#9c27b0" opacity="0.75"/>
+
+                        <!-- Legend -->
+                        <rect x="275" y="70" width="14" height="14" fill="#3f51b5" opacity="0.75"/>
+                        <text x="295" y="82" font-size="13">นอนหลับ 33%</text>
+                        <rect x="275" y="95" width="14" height="14" fill="#f44336" opacity="0.75"/>
+                        <text x="295" y="107" font-size="13">เรียนหนังสือ 25%</text>
+                        <rect x="275" y="120" width="14" height="14" fill="#ff9800" opacity="0.75"/>
+                        <text x="295" y="132" font-size="13">เล่น 22%</text>
+                        <rect x="275" y="145" width="14" height="14" fill="#4caf50" opacity="0.75"/>
+                        <text x="295" y="157" font-size="13">ทำการบ้าน 10%</text>
+                        <rect x="275" y="170" width="14" height="14" fill="#9c27b0" opacity="0.75"/>
+                        <text x="295" y="182" font-size="13">อื่นๆ 10%</text>
+                    </svg>
+                `,
+
+                // ===== แผนภูมิวงกลม - ผลไม้ =====
+                'pie-chart-fruit': `
+                    <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400">
+                        <text x="200" y="20" text-anchor="middle" font-size="15" font-weight="bold">ผลไม้ที่ขายได้ (kg)</text>
+                        <!-- center=(155,155) r=100 -->
+                        <!-- มะม่วง 25% = 90° : 0→90 -->
+                        <path d="M155,155 L255,155 A100,100 0 0,1 155,55 Z" fill="#ff9800" opacity="0.8"/>
+                        <!-- ส้ม 30% = 108° : 90→198 -->
+                        <path d="M155,155 L155,55 A100,100 0 0,1 60,186 Z" fill="#f44336" opacity="0.8"/>
+                        <!-- กล้วย 20% = 72° : 198→270 -->
+                        <path d="M155,155 L60,186 A100,100 0 0,1 155,255 Z" fill="#ffeb3b" opacity="0.8"/>
+                        <!-- ฝรั่ง 15% = 54° : 270→324 -->
+                        <path d="M155,155 L155,255 A100,100 0 0,1 236,216 Z" fill="#4caf50" opacity="0.8"/>
+                        <!-- อื่นๆ 10% = 36° : 324→360 -->
+                        <path d="M155,155 L236,216 A100,100 0 0,1 255,155 Z" fill="#9c27b0" opacity="0.8"/>
+
+                        <!-- Legend -->
+                        <rect x="275" y="70" width="14" height="14" fill="#ff9800" opacity="0.8"/>
+                        <text x="295" y="82" font-size="13">มะม่วง 25%</text>
+                        <rect x="275" y="95" width="14" height="14" fill="#f44336" opacity="0.8"/>
+                        <text x="295" y="107" font-size="13">ส้ม 30%</text>
+                        <rect x="275" y="120" width="14" height="14" fill="#ffeb3b" opacity="0.8"/>
+                        <text x="295" y="132" font-size="13">กล้วย 20%</text>
+                        <rect x="275" y="145" width="14" height="14" fill="#4caf50" opacity="0.8"/>
+                        <text x="295" y="157" font-size="13">ฝรั่ง 15%</text>
+                        <rect x="275" y="170" width="14" height="14" fill="#9c27b0" opacity="0.8"/>
+                        <text x="295" y="182" font-size="13">อื่นๆ 10%</text>
+                    </svg>
+                `
+            };
+
+            return images[imageType] || '';
+        }
+
+        // สร้างข้อสอบ
+        function initializeTest() {
+            const container = document.getElementById('testSection');
+            container.innerHTML = '';
+
+            questions.forEach((q, idx) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'question-item';
+                qDiv.id = `q-${idx}`;
+
+                let contentHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${idx + 1}</div>
+                        <div class="question-text">${q.q}</div>
+                    </div>
+                `;
+
+                if (q.image) {
+                    contentHTML += `
+                        <div class="question-image">
+                            ${generateImage(q.image)}
+                        </div>
+                    `;
+                }
+
+                if (q.type === 'choice') {
+                    contentHTML += '<div class="choices">';
+                    q.choices.forEach((choice, cIdx) => {
+                        contentHTML += `
+                            <div class="choice-item">
+                                <input type="radio"
+                                       name="q${idx}"
+                                       id="q${idx}-c${cIdx}"
+                                       value="${cIdx}"
+                                       onchange="updateProgress()">
+                                <label for="q${idx}-c${cIdx}">${choice}</label>
+                            </div>
+                        `;
+                    });
+                    contentHTML += '</div>';
+                } else {
+                    contentHTML += `
+                        <div class="input-answer">
+                            <input type="text"
+                                   id="q${idx}-input"
+                                   placeholder="พิมพ์คำตอบที่นี่"
+                                   onkeyup="updateProgress()">
+                        </div>
+                    `;
+                }
+
+                qDiv.innerHTML = contentHTML;
+                container.appendChild(qDiv);
+            });
+
+            document.getElementById('testDate').valueAsDate = new Date();
+        }
+
+        // อัพเดท Progress
+        function updateProgress() {
+            let answered = 0;
+            const total = questions.length;
+
+            questions.forEach((q, idx) => {
+                if (q.type === 'choice') {
+                    const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                    if (selected) answered++;
+                } else {
+                    const input = document.getElementById(`q${idx}-input`);
+                    if (input && input.value.trim() !== '') answered++;
+                }
+            });
+
+            const progressBar = document.getElementById('progressBar');
+            const percent = Math.round((answered / total) * 100);
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = `${answered}/${total} ข้อ`;
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = (answered !== total);
+        }
+
+        // ส่งข้อสอบ
+        async function submitTest() {
+            const studentName = document.getElementById('studentName').value.trim();
+            const schoolName = document.getElementById('schoolName').value.trim();
+
+            if (!studentName || !schoolName) {
+                alert('❌ กรุณากรอกชื่อนักเรียนและชื่อโรงเรียนให้ครบถ้วน');
+                return;
+            }
+
+            const answers = {};
+            const results = {};
+
+            questions.forEach((q, idx) => {
+                let userAnswer = null;
+
+                if (q.type === 'choice') {
+                    const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                    if (selected) userAnswer = parseInt(selected.value);
+                } else {
+                    const input = document.getElementById(`q${idx}-input`);
+                    if (input) userAnswer = input.value.trim().replace(/,/g, '');
+                }
+
+                answers[`q${idx}`] = userAnswer;
+
+                let isCorrect = false;
+                if (userAnswer !== null) {
+                    if (q.type === 'choice') {
+                        isCorrect = userAnswer === q.answer;
+                    } else {
+                        const correctAnswer = String(q.answer).replace(/,/g, '');
+                        isCorrect = userAnswer === correctAnswer;
+                    }
+                }
+
+                if (!results[q.skill]) results[q.skill] = { correct: 0, total: 0 };
+                results[q.skill].total++;
+                if (isCorrect) results[q.skill].correct++;
+            });
+
+            const testData = {
+                timestamp: new Date().toISOString(),
+                studentName,
+                schoolName,
+                gradeLevel: document.getElementById('gradeLevel').value,
+                parentPhone: document.getElementById('parentPhone').value,
+                testDate: document.getElementById('testDate').value,
+                answers,
+                results,
+                summary: calculateSummary(results)
+            };
+
+            document.getElementById('actionButtons').style.display = 'none';
+            document.getElementById('loadingSection').classList.add('active');
+
+            try {
+                await sendToGoogleSheets(testData);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                document.getElementById('loadingSection').classList.remove('active');
+                document.getElementById('successMessage').classList.add('active');
+                document.getElementById('testSection').style.display = 'none';
+                document.getElementById('progressBar').parentElement.style.display = 'none';
+            } catch (error) {
+                alert('❌ เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง');
+                document.getElementById('loadingSection').classList.remove('active');
+                document.getElementById('actionButtons').style.display = 'flex';
+            }
+        }
+
+        function calculateSummary(results) {
+            let totalCorrect = 0;
+            let totalQuestions = 0;
+            let mastered = 0;
+            let weak = 0;
+            let critical = 0;
+
+            Object.values(results).forEach(r => {
+                totalCorrect += r.correct;
+                totalQuestions += r.total;
+                const percent = Math.round((r.correct / r.total) * 100);
+                if (percent >= 80) mastered++;
+                else if (percent >= 60) weak++;
+                else critical++;
+            });
+
+            return {
+                totalCorrect,
+                totalQuestions,
+                percent: Math.round((totalCorrect / totalQuestions) * 100),
+                mastered,
+                weak,
+                critical
+            };
+        }
+
+
+        // ========================================
+        // 🔗 Google Sheets Integration
+        // ========================================
+        // TODO: แทนที่ YOUR_GOOGLE_APPS_SCRIPT_URL ด้วย URL จริงจาก Google Apps Script
+        // 
+        // 📋 ขั้นตอนการตั้งค่า:
+        // 1. สร้าง Google Sheet ใหม่
+        // 2. Extensions → Apps Script
+        // 3. วางโค้ดจากไฟล์ google-apps-script.js
+        // 4. Deploy → New deployment → Web app
+        // 5. Execute as: Me, Who has access: Anyone
+        // 6. คัดลอก URL แล้วนำมาแทนที่ด้านล่าง
+        
+        const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+
+        async function sendToGoogleSheets(data) {
+            // ตรวจสอบว่าได้ตั้งค่า URL แล้วหรือยัง
+            if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
+                console.warn("⚠️ กรุณาตั้งค่า GOOGLE_SCRIPT_URL ก่อนใช้งาน");
+                console.log("📊 ข้อมูลที่จะส่ง:", data);
+                alert("⚠️ ระบบยังไม่ได้เชื่อมต่อ Google Sheets\nกรุณาติดต่อครูเพื่อแก้ไข");
+                return false;
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                console.log("✅ ส่งข้อมูลไปยัง Google Sheets สำเร็จ");
+                return true;
+                
+            } catch (error) {
+                console.error("❌ เกิดข้อผิดพลาดในการส่งข้อมูล:", error);
+                return false;
+            }
+        }
+
+        initializeTest();
+    </script>
+</body>
+</html>

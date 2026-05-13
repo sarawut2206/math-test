@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบคณิตศาสตร์ ป.4 | TUTOR บ้านครู</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .student-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-field label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info-field input, .info-field select {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .info-field input:focus, .info-field select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .question-item {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .question-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .question-text {
+            font-size: 17px;
+            color: #212529;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .question-image {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .question-image svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 3px;
+            font-size: 1.1em;
+        }
+
+        .fraction-numerator {
+            border-bottom: 2px solid #212529;
+            padding: 0 5px 2px 5px;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .fraction-denominator {
+            padding: 2px 5px 0 5px;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .choices {
+            margin-top: 15px;
+        }
+
+        .choice-item {
+            padding: 12px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 2px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+        }
+
+        .choice-item:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .choice-item input[type="radio"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .choice-item label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-answer {
+            margin-top: 15px;
+        }
+
+        .input-answer input {
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 18px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .input-answer input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .action-buttons {
+            position: sticky;
+            bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .success-message.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message h2 {
+            color: #155724;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #155724;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .btn {
+                min-width: 100%;
+            }
+        }
+
+        .test-instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .test-instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .test-instructions ul {
+            color: #856404;
+            margin-left: 20px;
+        }
+
+        .test-instructions li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 แบบทดสอบคณิตศาสตร์ ป.4</h1>
+            <p>ครูแซม คณิตตรงจุด ติด Turbo</p>
+        </div>
+
+        <div class="main-content">
+            <!-- ข้อมูลนักเรียน -->
+            <div class="student-info">
+                <div class="info-row">
+                    <div class="info-field">
+                        <label>ชื่อ-นามสกุลนักเรียน <span class="required">*</span></label>
+                        <input type="text" id="studentName" placeholder="เช่น เด็กชายสมชาย ใจดี" required>
+                    </div>
+                    <div class="info-field">
+                        <label>โรงเรียน <span class="required">*</span></label>
+                        <input type="text" id="schoolName" placeholder="เช่น โรงเรียนประถมวัดหนองแขม" required>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <label>ชั้น</label>
+                        <select id="gradeLevel">
+                            <option value="ป.4">ป.4</option>
+                            <option value="ป.3">ป.3</option>
+                            <option value="ป.5">ป.5</option>
+                        </select>
+                    </div>
+                    <div class="info-field">
+                        <label>เบอร์โทรผู้ปกครอง</label>
+                        <input type="tel" id="parentPhone" placeholder="0812345678">
+                    </div>
+                    <div class="info-field">
+                        <label>วันที่ทำข้อสอบ</label>
+                        <input type="date" id="testDate">
+                    </div>
+                </div>
+            </div>
+
+            <!-- คำแนะนำ -->
+            <div class="test-instructions">
+                <h3>📌 คำแนะนำก่อนทำข้อสอบ</h3>
+                <ul>
+                    <li>แบบทดสอบนี้มี <strong>90 ข้อ</strong> ใช้เวลาประมาณ 50-60 นาที</li>
+                    <li>อ่านโจทย์ให้ละเอียด คิดให้รอบคอบก่อนตอบ</li>
+                    <li>สามารถย้อนกลับไปแก้คำตอบได้ก่อนกดส่ง</li>
+                    <li>กรุณากรอกข้อมูลให้ครบถ้วนก่อนเริ่มทำข้อสอบ</li>
+                </ul>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0/90</div>
+            </div>
+
+            <!-- ข้อสอบ -->
+            <div id="testSection"></div>
+
+            <!-- Loading -->
+            <div class="loading" id="loadingSection">
+                <div class="spinner"></div>
+                <p>กำลังส่งข้อมูล...</p>
+            </div>
+
+            <!-- ข้อความสำเร็จ -->
+            <div class="success-message" id="successMessage">
+                <h2>✅ ส่งข้อสอบสำเร็จ!</h2>
+                <p>ขอบคุณที่ทำแบบทดสอบครับ<br>
+                ผลการทดสอบจะถูกส่งไปยังครูเพื่อวิเคราะห์<br>
+                ครูจะติดต่อกลับไปในเร็วๆ นี้ครับ</p>
+            </div>
+
+            <!-- ปุ่มดำเนินการ -->
+            <div class="action-buttons" id="actionButtons">
+                <button class="btn btn-submit" onclick="submitTest()" id="submitBtn">
+                    ✅ ส่งข้อสอบ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลข้อสอบ ป.4 (90 ข้อ)
+        const questions = [
+            // กลุ่มที่ 1: การนับและจำนวน (Level 4) - ข้อ 1-5
+            {
+                skill: 'counting-4',
+                q: 'สามล้านห้าแสนสี่หมื่นหกพัน เขียนเป็นตัวเลขได้ว่าอะไร?',
+                type: 'input',
+                answer: '3546000'
+            },
+            {
+                skill: 'counting-4',
+                q: 'จำนวน 2,750,000 อ่านว่าอะไร?',
+                type: 'choice',
+                choices: [
+                    'สองล้านเจ็ดแสนห้าหมื่น',
+                    'สองล้านเจ็ดร้อยห้าสิบพัน',
+                    'สองพันเจ็ดร้อยห้าสิบพัน',
+                    'สองพันเจ็ดแสนห้าหมื่น'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'counting-4',
+                q: 'เลข 8 ในจำนวน 5,806,432 มีค่าเท่าใด?',
+                type: 'choice',
+                choices: ['8', '8,000', '80,000', '800,000'],
+                answer: 3
+            },
+            {
+                skill: 'counting-4',
+                q: 'ข้อใดมีค่ามากที่สุด?',
+                type: 'choice',
+                choices: ['1,999,999', '2,000,001', '1,998,888', '2,001,000'],
+                answer: 3
+            },
+            {
+                skill: 'counting-4',
+                q: 'หนึ่งหมื่นล้าน เขียนเป็นตัวเลขได้ว่าอะไร?',
+                type: 'input',
+                answer: '10000000000'
+            },
+
+            // กลุ่มที่ 2: การบวกลบ (Level 4) - ข้อ 6-10
+            {
+                skill: 'addition-4',
+                q: '456,789 + 234,567 ประมาณเป็นจำนวนพันได้ว่า',
+                type: 'choice',
+                choices: ['690,000', '691,000', '700,000', '680,000'],
+                answer: 1
+            },
+            {
+                skill: 'addition-4',
+                q: '987,654 - 321,098 ประมาณเป็นจำนวนหมื่นได้ว่า',
+                type: 'choice',
+                choices: ['660,000', '670,000', '680,000', '650,000'],
+                answer: 1
+            },
+            {
+                skill: 'addition-4',
+                q: 'ร้านค้ามีรายรับ 125,000 บาท รายจ่าย 78,500 บาท กำไรเท่าไร?',
+                type: 'input',
+                answer: '46500'
+            },
+            {
+                skill: 'addition-4',
+                q: '1,234,567 + 876,543 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '2111110'
+            },
+            {
+                skill: 'addition-4',
+                q: '5,000,000 - 2,345,678 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '2654322'
+            },
+
+            // กลุ่มที่ 3: การคูณ (Level 3) - ข้อ 11-15
+            {
+                skill: 'multiplication-3',
+                q: '456 × 23 ประมาณเป็นจำนวนพันได้ว่า',
+                type: 'choice',
+                choices: ['9,000', '10,000', '11,000', '12,000'],
+                answer: 1
+            },
+            {
+                skill: 'multiplication-3',
+                q: '324 × 56 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '18144'
+            },
+            {
+                skill: 'multiplication-3',
+                q: 'ร้านขายไข่วันละ 24 ฟอง ขายได้ 30 วัน จะได้เงินเท่าไร ถ้าฟองละ 5 บาท?',
+                type: 'input',
+                answer: '3600'
+            },
+            {
+                skill: 'multiplication-3',
+                q: 'ถ้า 125 × 8 = 1,000 แล้ว 125 × 16 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['1,500', '2,000', '2,500', '3,000'],
+                answer: 1
+            },
+            {
+                skill: 'multiplication-3',
+                q: '789 × 100 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '78900'
+            },
+
+            // กลุ่มที่ 4: การหาร (Level 3) - ข้อ 16-20
+            {
+                skill: 'division-3',
+                q: '8,456 ÷ 23 ประมาณเท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['300', '350', '400', '450'],
+                answer: 2
+            },
+            {
+                skill: 'division-3',
+                q: '2,496 ÷ 12 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '208'
+            },
+            {
+                skill: 'division-3',
+                q: 'แบ่งเงิน 5,400 บาทให้คน 18 คน เท่า ๆ กัน คนละเท่าไร?',
+                type: 'input',
+                answer: '300'
+            },
+            {
+                skill: 'division-3',
+                q: '10,000 ÷ 25 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['40', '400', '4,000', '40,000'],
+                answer: 1
+            },
+            {
+                skill: 'division-3',
+                q: '7,893 ÷ 9 เท่าไร เหลือเท่าไร?',
+                type: 'choice',
+                choices: ['877 เหลือ 0', '876 เหลือ 9', '877 เหลือ 6', '878 เหลือ 3'],
+                answer: 2
+            },
+
+            // กลุ่มที่ 5: เศษส่วน Level 4 - ข้อ 21-30
+            {
+                skill: 'fraction-4',
+                q: '<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">5</span></span> เป็นเศษส่วนประเภทใด?',
+                type: 'choice',
+                choices: ['เศษส่วนแท้', 'เศษส่วนเกิน', 'จำนวนคละ', 'เศษส่วนผกผัน'],
+                answer: 1
+            },
+            {
+                skill: 'fraction-4',
+                q: '2<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> เขียนเป็นเศษส่วนเกินได้ว่า',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">8</span><span class="fraction-denominator">4</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">9</span><span class="fraction-denominator">4</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">10</span><span class="fraction-denominator">4</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">11</span><span class="fraction-denominator">4</span></span>'
+                ],
+                answer: 3
+            },
+            {
+                skill: 'fraction-4',
+                q: '<span class="fraction"><span class="fraction-numerator">13</span><span class="fraction-denominator">5</span></span> เขียนเป็นจำนวนคละได้ว่า',
+                type: 'choice',
+                choices: [
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">5</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">5</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">5</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">5</span></span>'
+                ],
+                answer: 2
+            },
+            {
+                skill: 'fraction-4',
+                q: '<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span> + <span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">7</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">17</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">12</span></span>',
+                    '1<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">12</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'fraction-4',
+                q: '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> + 2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '3<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">5</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">6</span></span>',
+                    '4<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">6</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">5</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'fraction-4',
+                q: '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">6</span></span> - <span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">4</span><span class="fraction-denominator">2</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">7</span><span class="fraction-denominator">12</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'fraction-4',
+                q: '3<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">5</span></span> - 1<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">5</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '1<span class="fraction"><span class="fraction-numerator">4</span><span class="fraction-denominator">5</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">5</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">4</span><span class="fraction-denominator">5</span></span>',
+                    '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">5</span></span>'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'fraction-4',
+                q: 'ข้อใดเป็นเศษส่วนแท้?',
+                type: 'choice',
+                choices: [
+                    '<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">5</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">7</span></span>',
+                    '<span class="fraction"><span class="fraction-numerator">9</span><span class="fraction-denominator">4</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'fraction-4',
+                q: 'กินข้าวไป 1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> จาน แล้วกินอีก <span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> จาน กินไปทั้งหมดกี่จาน?',
+                type: 'choice',
+                choices: ['1 จาน', '2 จาน', '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> จาน', '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span> จาน'],
+                answer: 1
+            },
+            {
+                skill: 'fraction-4',
+                q: '<span class="fraction"><span class="fraction-numerator">8</span><span class="fraction-denominator">3</span></span> เท่ากับจำนวนคละใด?',
+                type: 'choice',
+                choices: [
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">3</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">5</span><span class="fraction-denominator">3</span></span>',
+                    '3<span class="fraction"><span class="fraction-numerator">2</span><span class="fraction-denominator">3</span></span>'
+                ],
+                answer: 1
+            },
+
+            // กลุ่มที่ 6: ทศนิยม (Level 1-2) - ข้อ 31-40
+            {
+                skill: 'decimal-1',
+                q: 'ทศนิยม 3.456 อ่านว่าอะไร?',
+                type: 'choice',
+                choices: [
+                    'สามจุดสี่ห้าหก',
+                    'สามจุดสี่ร้อยห้าสิบหก',
+                    'สามลูกน้ำสี่ห้าหก',
+                    'สามจุดสี่สิบห้าหก'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'decimal-1',
+                q: 'ห้าจุดเจ็ดสอง เขียนเป็นทศนิยมได้ว่า',
+                type: 'input',
+                answer: '5.72'
+            },
+            {
+                skill: 'decimal-2',
+                q: 'เลข 8 ในทศนิยม 12.589 มีค่าเท่าใด?',
+                type: 'choice',
+                choices: ['8', '0.8', '0.08', '80'],
+                answer: 2
+            },
+            {
+                skill: 'decimal-2',
+                q: 'เลข 7 ในทศนิยม 0.714 อยู่ในหลักใด?',
+                type: 'choice',
+                choices: ['หลักหน่วย', 'หลักสิบ', 'หลักส่วนสิบ', 'หลักส่วนร้อย'],
+                answer: 2
+            },
+            {
+                skill: 'decimal-1',
+                q: 'ข้อใดมีค่ามากที่สุด?',
+                type: 'choice',
+                choices: ['0.75', '0.8', '0.705', '0.85'],
+                answer: 3
+            },
+            {
+                skill: 'decimal-1',
+                q: 'ข้อใดมีค่าน้อยที่สุด?',
+                type: 'choice',
+                choices: ['1.234', '1.243', '1.324', '1.342'],
+                answer: 0
+            },
+            {
+                skill: 'decimal-2',
+                q: 'ทศนิยม 4.5 เขียนในรูปกระจายได้ว่า',
+                type: 'choice',
+                choices: [
+                    '4 + 0.5',
+                    '40 + 5',
+                    '4 + 5',
+                    '0.4 + 0.5'
+                ],
+                answer: 0
+            },
+            {
+                skill: 'decimal-1',
+                q: 'เรียงจากน้อยไปมาก: 2.5, 2.15, 2.05',
+                type: 'choice',
+                choices: [
+                    '2.5, 2.15, 2.05',
+                    '2.05, 2.15, 2.5',
+                    '2.15, 2.05, 2.5',
+                    '2.05, 2.5, 2.15'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'decimal-2',
+                q: '12.345 มีเลข 3 อยู่ในหลักใด?',
+                type: 'choice',
+                choices: ['หลักหน่วย', 'หลักสิบ', 'หลักส่วนสิบ', 'หลักส่วนร้อย'],
+                answer: 2
+            },
+            {
+                skill: 'decimal-1',
+                q: 'ศูนย์จุดเก้าห้า เขียนเป็นทศนิยมได้ว่า',
+                type: 'input',
+                answer: '0.95'
+            },
+
+            // กลุ่มที่ 7: การวัดความยาว (Level 4-5) - ข้อ 41-45
+            {
+                skill: 'length-4',
+                q: '5 กิโลเมตร 750 เมตร เท่ากับกี่เมตร?',
+                type: 'input',
+                answer: '5750'
+            },
+            {
+                skill: 'length-4',
+                q: '3,500 มิลลิเมตร เท่ากับกี่เซนติเมตร?',
+                type: 'choice',
+                choices: ['35', '350', '3.5', '3,500'],
+                answer: 1
+            },
+            {
+                skill: 'length-4',
+                q: '2.5 กิโลเมตร เท่ากับกี่เมตร?',
+                type: 'input',
+                answer: '2500'
+            },
+            {
+                skill: 'length-4',
+                q: '45 เซนติเมตร + 850 มิลลิเมตร เท่ากับกี่เซนติเมตร?',
+                type: 'choice',
+                choices: ['85', '130', '135', '895'],
+                answer: 2
+            },
+            {
+                skill: 'length-4',
+                q: '1 กิโลเมตร 500 เมตร ลบ 750 เมตร เหลือกี่เมตร?',
+                type: 'input',
+                answer: '750'
+            },
+
+            // กลุ่มที่ 8: การวัดน้ำหนัก (Level 4-5) - ข้อ 46-50
+            {
+                skill: 'weight-4',
+                q: '4 กิโลกรัม 250 กรัม เท่ากับกี่กรัม?',
+                type: 'input',
+                answer: '4250'
+            },
+            {
+                skill: 'weight-4',
+                q: '8,500 กรัม เท่ากับกี่กิโลกรัม?',
+                type: 'choice',
+                choices: ['8.5', '85', '0.85', '850'],
+                answer: 0
+            },
+            {
+                skill: 'weight-4',
+                q: '2.5 เมตริกตัน เท่ากับกี่กิโลกรัม?',
+                type: 'input',
+                answer: '2500'
+            },
+            {
+                skill: 'weight-4',
+                q: '3 กิโลกรัม + 2,500 กรัม เท่ากับกี่กิโลกรัม?',
+                type: 'choice',
+                choices: ['5', '5.5', '6', '2.8'],
+                answer: 1
+            },
+            {
+                skill: 'weight-4',
+                q: '10 กิโลกรัม ลบ 3,250 กรัม เหลือกี่กรัม?',
+                type: 'input',
+                answer: '6750'
+            },
+
+            // กลุ่มที่ 9: เวลา (Level 5) - ข้อ 51-55
+            {
+                skill: 'time-5',
+                q: '1 นาที เท่ากับกี่วินาที?',
+                type: 'input',
+                answer: '60'
+            },
+            {
+                skill: 'time-5',
+                q: '1 ปี เท่ากับกี่วัน? (ปีปกติ)',
+                type: 'choice',
+                choices: ['360 วัน', '365 วัน', '366 วัน', '364 วัน'],
+                answer: 1
+            },
+            {
+                skill: 'time-5',
+                q: '2 ชั่วโมง 30 นาที เท่ากับกี่นาที?',
+                type: 'input',
+                answer: '150'
+            },
+            {
+                skill: 'time-5',
+                q: '180 นาที เท่ากับกี่ชั่วโมง?',
+                type: 'choice',
+                choices: ['2 ชั่วโมง', '3 ชั่วโมง', '4 ชั่วโมง', '5 ชั่วโมง'],
+                answer: 1
+            },
+            {
+                skill: 'time-5',
+                q: '3 สัปดาห์ เท่ากับกี่วัน?',
+                type: 'input',
+                answer: '21'
+            },
+
+            // กลุ่มที่ 10: รูปเรขาคณิต 2D + มุม (Level 4) - ข้อ 56-65
+            {
+                skill: 'geometry-4',
+                q: 'รูปสี่เหลี่ยมมุมฉากมีกี่มุมฉาก?',
+                type: 'choice',
+                choices: ['1 มุม', '2 มุม', '3 มุม', '4 มุม'],
+                answer: 3,
+                image: 'rectangle-shape'
+            },
+            {
+                skill: 'angle-1',
+                q: 'มุมฉากมีขนาดกี่องศา?',
+                type: 'choice',
+                choices: ['45 องศา', '60 องศา', '90 องศา', '180 องศา'],
+                answer: 2
+            },
+            {
+                skill: 'angle-1',
+                q: 'จากรูป มุม A มีขนาดกี่องศา?',
+                type: 'choice',
+                choices: ['30 องศา', '45 องศา', '60 องศา', '90 องศา'],
+                answer: 1,
+                image: 'angle-45'
+            },
+            {
+                skill: 'angle-1',
+                q: 'จากรูป มุม B มีขนาดกี่องศา?',
+                type: 'choice',
+                choices: ['60 องศา', '90 องศา', '120 องศา', '150 องศา'],
+                answer: 2,
+                image: 'angle-120'
+            },
+            {
+                skill: 'geometry-4',
+                q: 'รูปสี่เหลี่ยมมุมฉากมีด้านยาว 8 ซม. และกว้าง 5 ซม. ความยาวรอบรูปเท่าไร?',
+                type: 'choice',
+                choices: ['13 ซม.', '26 ซม.', '40 ซม.', '80 ซม.'],
+                answer: 1
+            },
+            {
+                skill: 'geometry-4',
+                q: 'รูปสี่เหลี่ยมจัตุรัสด้านยาว 6 ซม. พื้นที่เท่าไร?',
+                type: 'choice',
+                choices: ['12 ตร.ซม.', '24 ตร.ซม.', '36 ตร.ซม.', '48 ตร.ซม.'],
+                answer: 2
+            },
+            {
+                skill: 'geometry-4',
+                q: 'รูปสี่เหลี่ยมผืนผ้ายาว 10 ซม. กว้าง 4 ซม. พื้นที่เท่าไร?',
+                type: 'input',
+                answer: '40'
+            },
+            {
+                skill: 'geometry-4',
+                q: 'รูปสี่เหลี่ยมมุมฉากมีพื้นที่ 48 ตร.ซม. ยาว 8 ซม. กว้างเท่าไร?',
+                type: 'choice',
+                choices: ['4 ซม.', '5 ซม.', '6 ซม.', '7 ซม.'],
+                answer: 2
+            },
+            {
+                skill: 'angle-1',
+                q: 'มุมแหลมมีขนาด',
+                type: 'choice',
+                choices: [
+                    'เท่ากับ 90 องศา',
+                    'น้อยกว่า 90 องศา',
+                    'มากกว่า 90 องศา',
+                    'เท่ากับ 180 องศา'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'angle-1',
+                q: 'มุมป้านมีขนาด',
+                type: 'choice',
+                choices: [
+                    'เท่ากับ 90 องศา',
+                    'น้อยกว่า 90 องศา',
+                    'มากกว่า 90 องศาแต่น้อยกว่า 180 องศา',
+                    'เท่ากับ 180 องศา'
+                ],
+                answer: 2
+            },
+
+            // กลุ่มที่ 11: แผนภูมิ Level 4-5 - ข้อ 66-75
+            {
+                skill: 'chart-4',
+                q: 'จากแผนภูมิแท่ง เดือนใดขายได้มากที่สุด?',
+                type: 'choice',
+                choices: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน'],
+                answer: 2,
+                image: 'bar-chart-sales'
+            },
+            {
+                skill: 'chart-4',
+                q: 'จากแผนภูมิแท่งข้อที่แล้ว ขายได้รวมทั้งหมดกี่ชิ้น?',
+                type: 'input',
+                answer: '400'
+            },
+            {
+                skill: 'chart-4',
+                q: 'จากแผนภูมิแท่ง ผลต่างระหว่างเดือนที่ขายได้มากสุดกับน้อยสุดเท่าไร?',
+                type: 'choice',
+                choices: ['50 ชิ้น', '60 ชิ้น', '70 ชิ้น', '80 ชิ้น'],
+                answer: 1
+            },
+            {
+                skill: 'chart-5',
+                q: 'จากตารางสองทาง นักเรียนชายชอบฟุตบอลกี่คน?',
+                type: 'choice',
+                choices: ['12 คน', '15 คน', '18 คน', '20 คน'],
+                answer: 2,
+                image: 'two-way-table'
+            },
+            {
+                skill: 'chart-5',
+                q: 'จากตารางข้อที่แล้ว นักเรียนหญิงชอบวอลเลย์บอลกี่คน?',
+                type: 'choice',
+                choices: ['8 คน', '10 คน', '12 คน', '14 คน'],
+                answer: 2
+            },
+            {
+                skill: 'chart-5',
+                q: 'จากตารางข้อที่แล้ว นักเรียนทั้งหมดกี่คน?',
+                type: 'input',
+                answer: '60'
+            },
+            {
+                skill: 'chart-4',
+                q: 'จากแผนภูมิแท่ง คะแนนของใครสูงที่สุด?',
+                type: 'choice',
+                choices: ['สมชาย', 'สมหญิง', 'สมศักดิ์', 'สมศรี'],
+                answer: 1,
+                image: 'bar-chart-scores'
+            },
+            {
+                skill: 'chart-4',
+                q: 'จากแผนภูมิข้อที่แล้ว คะแนนเฉลี่ยของทั้ง 4 คนเท่าไร?',
+                type: 'choice',
+                choices: ['75 คะแนน', '80 คะแนน', '85 คะแนน', '90 คะแนน'],
+                answer: 1
+            },
+            {
+                skill: 'chart-5',
+                q: 'จากตาราง วันใดฝนตกมากที่สุด?',
+                type: 'choice',
+                choices: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี'],
+                answer: 2,
+                image: 'table-rainfall'
+            },
+            {
+                skill: 'chart-5',
+                q: 'จากตารางข้อที่แล้ว ฝนตกรวมทั้ง 4 วันกี่มิลลิเมตร?',
+                type: 'input',
+                answer: '180'
+            },
+
+            // กลุ่มที่ 12: แบบรูป (Level 4) - ข้อ 76-80
+            {
+                skill: 'pattern-4',
+                q: '3, 9, 27, 81, ___ ตัวถัดไปคือเท่าไร?',
+                type: 'input',
+                answer: '243'
+            },
+            {
+                skill: 'pattern-4',
+                q: '2, 6, 18, 54, ___ เป็นการคูณทีละเท่าไร?',
+                type: 'choice',
+                choices: ['ทีละ 2', 'ทีละ 3', 'ทีละ 4', 'ทีละ 5'],
+                answer: 1
+            },
+            {
+                skill: 'pattern-4',
+                q: '512, 256, 128, 64, ___ ตัวถัดไปคือเท่าไร?',
+                type: 'choice',
+                choices: ['16', '24', '32', '48'],
+                answer: 2
+            },
+            {
+                skill: 'pattern-4',
+                q: 'ถ้า 5 × 7 = 35 แล้ว 50 × 70 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '3500'
+            },
+            {
+                skill: 'pattern-4',
+                q: 'ถ้า 100 ÷ 4 = 25 แล้ว 1,000 ÷ 4 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['25', '250', '2,500', '25,000'],
+                answer: 1
+            },
+
+            // กลุ่มเพิ่มเติม - ข้อ 81-90
+            {
+                skill: 'counting-4',
+                q: 'สิบล้าน เขียนเป็นตัวเลขได้ว่าอะไร?',
+                type: 'input',
+                answer: '10000000'
+            },
+            {
+                skill: 'multiplication-3',
+                q: '999 × 9 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '8991'
+            },
+            {
+                skill: 'division-3',
+                q: '1,000 ÷ 8 เท่าไร เหลือเท่าไร?',
+                type: 'choice',
+                choices: ['125 เหลือ 0', '124 เหลือ 8', '125 เหลือ 5', '124 เหลือ 2'],
+                answer: 0
+            },
+            {
+                skill: 'fraction-4',
+                q: '4<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span> - 2<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span> เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: [
+                    '1<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>',
+                    '1<span class="fraction"><span class="fraction-numerator">3</span><span class="fraction-denominator">4</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">4</span></span>',
+                    '2<span class="fraction"><span class="fraction-numerator">1</span><span class="fraction-denominator">2</span></span>'
+                ],
+                answer: 1
+            },
+            {
+                skill: 'decimal-2',
+                q: '0.6 + 0.45 เท่ากับเท่าไร?',
+                type: 'choice',
+                choices: ['0.51', '1.05', '0.105', '1.5'],
+                answer: 1
+            },
+            {
+                skill: 'geometry-4',
+                q: 'รูปสี่เหลี่ยมผืนผ้ายาว 12 ซม. กว้าง 7 ซม. ความยาวรอบรูปเท่าไร?',
+                type: 'input',
+                answer: '38'
+            },
+            {
+                skill: 'angle-1',
+                q: 'มุมตรงมีขนาดกี่องศา?',
+                type: 'choice',
+                choices: ['90 องศา', '120 องศา', '150 องศา', '180 องศา'],
+                answer: 3
+            },
+            {
+                skill: 'addition-4',
+                q: '999,999 + 1 เท่ากับเท่าไร?',
+                type: 'input',
+                answer: '1000000'
+            },
+            {
+                skill: 'pattern-4',
+                q: '1, 4, 9, 16, 25, ___ ตัวถัดไปคือเท่าไร?',
+                type: 'choice',
+                choices: ['30', '32', '35', '36'],
+                answer: 3
+            },
+            {
+                skill: 'time-5',
+                q: '3 ชั่วโมง 45 นาที เท่ากับกี่นาที?',
+                type: 'input',
+                answer: '225'
+            }
+        ];
+
+        // ฟังก์ชันสร้างรูปภาพ
+        function generateImage(imageType) {
+            const images = {
+                'rectangle-shape': `
+                    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" width="200">
+                        <rect x="30" y="20" width="140" height="80" fill="#9c27b0" opacity="0.3" stroke="#6a1b9a" stroke-width="3"/>
+                    </svg>
+                `,
+                'angle-45': `
+                    <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" width="400">
+                        <!-- ครึ่งวงกลมโพรแทรกเตอร์ -->
+                        <path d="M 50 200 A 150 150 0 0 1 350 200" fill="#f5f5f5" stroke="#424242" stroke-width="2"/>
+                        <!-- เส้นแบ่งทุก 10 องศา -->
+                        ${Array.from({length: 19}, (_, i) => {
+                            const angle = i * 10;
+                            const rad = (angle - 90) * Math.PI / 180;
+                            const x1 = 200 + 150 * Math.cos(rad);
+                            const y1 = 200 + 150 * Math.sin(rad);
+                            const x2 = 200 + 140 * Math.cos(rad);
+                            const y2 = 200 + 140 * Math.sin(rad);
+                            return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#666" stroke-width="1"/>`;
+                        }).join('')}
+                        <!-- เส้นแบ่งทุก 30 องศา (หนา) -->
+                        ${Array.from({length: 7}, (_, i) => {
+                            const angle = i * 30;
+                            const rad = (angle - 90) * Math.PI / 180;
+                            const x1 = 200 + 150 * Math.cos(rad);
+                            const y1 = 200 + 150 * Math.sin(rad);
+                            const x2 = 200 + 130 * Math.cos(rad);
+                            const y2 = 200 + 130 * Math.sin(rad);
+                            return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#333" stroke-width="2"/>`;
+                        }).join('')}
+                        <!-- ตัวเลของศา -->
+                        ${[0, 30, 60, 90, 120, 150, 180].map(angle => {
+                            const rad = (angle - 90) * Math.PI / 180;
+                            const x = 200 + 120 * Math.cos(rad);
+                            const y = 200 + 120 * Math.sin(rad);
+                            return `<text x="${x}" y="${y+5}" text-anchor="middle" font-size="14" font-weight="bold">${angle}</text>`;
+                        }).join('')}
+                        <!-- เส้นฐาน -->
+                        <line x1="50" y1="200" x2="380" y2="200" stroke="#000" stroke-width="3"/>
+                        <!-- เส้นแสดงมุม 45 องศา -->
+                        <line x1="200" y1="200" x2="306" y2="94" stroke="#d32f2f" stroke-width="3"/>
+                        <!-- ส่วนโค้งมุม -->
+                        <path d="M 250 200 A 50 50 0 0 1 235 165" stroke="#d32f2f" stroke-width="3" fill="none"/>
+                        <text x="265" y="185" font-size="20" font-weight="bold">A</text>
+                    </svg>
+                `,
+                'angle-120': `
+                    <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" width="400">
+                        <!-- ครึ่งวงกลมโพรแทรกเตอร์ -->
+                        <path d="M 50 200 A 150 150 0 0 1 350 200" fill="#f5f5f5" stroke="#424242" stroke-width="2"/>
+                        <!-- เส้นแบ่งทุก 10 องศา -->
+                        ${Array.from({length: 19}, (_, i) => {
+                            const angle = i * 10;
+                            const rad = (angle - 90) * Math.PI / 180;
+                            const x1 = 200 + 150 * Math.cos(rad);
+                            const y1 = 200 + 150 * Math.sin(rad);
+                            const x2 = 200 + 140 * Math.cos(rad);
+                            const y2 = 200 + 140 * Math.sin(rad);
+                            return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#666" stroke-width="1"/>`;
+                        }).join('')}
+                        <!-- เส้นแบ่งทุก 30 องศา (หนา) -->
+                        ${Array.from({length: 7}, (_, i) => {
+                            const angle = i * 30;
+                            const rad = (angle - 90) * Math.PI / 180;
+                            const x1 = 200 + 150 * Math.cos(rad);
+                            const y1 = 200 + 150 * Math.sin(rad);
+                            const x2 = 200 + 130 * Math.cos(rad);
+                            const y2 = 200 + 130 * Math.sin(rad);
+                            return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#333" stroke-width="2"/>`;
+                        }).join('')}
+                        <!-- ตัวเลของศา -->
+                        ${[0, 30, 60, 90, 120, 150, 180].map(angle => {
+                            const rad = (angle - 90) * Math.PI / 180;
+                            const x = 200 + 120 * Math.cos(rad);
+                            const y = 200 + 120 * Math.sin(rad);
+                            return `<text x="${x}" y="${y+5}" text-anchor="middle" font-size="14" font-weight="bold">${angle}</text>`;
+                        }).join('')}
+                        <!-- เส้นฐาน -->
+                        <line x1="50" y1="200" x2="380" y2="200" stroke="#000" stroke-width="3"/>
+                        <!-- เส้นแสดงมุม 120 องศา -->
+                        <line x1="200" y1="200" x2="125" y2="70" stroke="#d32f2f" stroke-width="3"/>
+                        <!-- ส่วนโค้งมุม -->
+                        <path d="M 270 200 A 70 70 0 0 1 165 105" stroke="#d32f2f" stroke-width="3" fill="none"/>
+                        <text x="285" y="185" font-size="20" font-weight="bold">B</text>
+                    </svg>
+                `,
+                'bar-chart-sales': `
+                    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400">
+                        <line x1="40" y1="200" x2="360" y2="200" stroke="#424242" stroke-width="2"/>
+                        <line x1="40" y1="200" x2="40" y2="20" stroke="#424242" stroke-width="2"/>
+                        
+                        <rect x="60" y="110" width="60" height="90" fill="#4caf50" opacity="0.7"/>
+                        <text x="90" y="220" text-anchor="middle" font-size="14">ม.ค.</text>
+                        <text x="90" y="100" text-anchor="middle" font-size="14" font-weight="bold">90</text>
+                        
+                        <rect x="140" y="130" width="60" height="70" fill="#2196f3" opacity="0.7"/>
+                        <text x="170" y="220" text-anchor="middle" font-size="14">ก.พ.</text>
+                        <text x="170" y="120" text-anchor="middle" font-size="14" font-weight="bold">70</text>
+                        
+                        <rect x="220" y="50" width="60" height="150" fill="#ff9800" opacity="0.7"/>
+                        <text x="250" y="220" text-anchor="middle" font-size="14">มี.ค.</text>
+                        <text x="250" y="40" text-anchor="middle" font-size="14" font-weight="bold">150</text>
+                        
+                        <rect x="300" y="110" width="60" height="90" fill="#e91e63" opacity="0.7"/>
+                        <text x="330" y="220" text-anchor="middle" font-size="14">เม.ย.</text>
+                        <text x="330" y="100" text-anchor="middle" font-size="14" font-weight="bold">90</text>
+                        
+                        <text x="200" y="245" text-anchor="middle" font-size="16" font-weight="bold">แผนภูมิแสดงยอดขาย (ชิ้น)</text>
+                    </svg>
+                `,
+                'two-way-table': `
+                    <svg viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg" width="350">
+                        <rect x="10" y="10" width="330" height="170" fill="white" stroke="#424242" stroke-width="2"/>
+                        
+                        <line x1="10" y1="50" x2="340" y2="50" stroke="#424242" stroke-width="2"/>
+                        <line x1="100" y1="10" x2="100" y2="180" stroke="#424242" stroke-width="2"/>
+                        <line x1="220" y1="10" x2="220" y2="180" stroke="#424242" stroke-width="2"/>
+                        
+                        <text x="55" y="35" text-anchor="middle" font-size="14" font-weight="bold">กีฬา</text>
+                        <text x="160" y="35" text-anchor="middle" font-size="14" font-weight="bold">ชาย</text>
+                        <text x="280" y="35" text-anchor="middle" font-size="14" font-weight="bold">หญิง</text>
+                        
+                        <text x="55" y="85" text-anchor="middle" font-size="14">ฟุตบอล</text>
+                        <text x="160" y="85" text-anchor="middle" font-size="14">18</text>
+                        <text x="280" y="85" text-anchor="middle" font-size="14">6</text>
+                        
+                        <text x="55" y="120" text-anchor="middle" font-size="14">บาส</text>
+                        <text x="160" y="120" text-anchor="middle" font-size="14">10</text>
+                        <text x="280" y="120" text-anchor="middle" font-size="14">8</text>
+                        
+                        <text x="55" y="155" text-anchor="middle" font-size="14">วอลเลย์</text>
+                        <text x="160" y="155" text-anchor="middle" font-size="14">6</text>
+                        <text x="280" y="155" text-anchor="middle" font-size="14">12</text>
+                    </svg>
+                `,
+                'bar-chart-scores': `
+                    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400">
+                        <line x1="40" y1="200" x2="360" y2="200" stroke="#424242" stroke-width="2"/>
+                        <line x1="40" y1="200" x2="40" y2="20" stroke="#424242" stroke-width="2"/>
+                        
+                        <rect x="60" y="70" width="60" height="130" fill="#4caf50" opacity="0.7"/>
+                        <text x="90" y="220" text-anchor="middle" font-size="13">สมชาย</text>
+                        <text x="90" y="60" text-anchor="middle" font-size="14" font-weight="bold">75</text>
+                        
+                        <rect x="140" y="30" width="60" height="170" fill="#2196f3" opacity="0.7"/>
+                        <text x="170" y="220" text-anchor="middle" font-size="13">สมหญิง</text>
+                        <text x="170" y="20" text-anchor="middle" font-size="14" font-weight="bold">90</text>
+                        
+                        <rect x="220" y="50" width="60" height="150" fill="#ff9800" opacity="0.7"/>
+                        <text x="250" y="220" text-anchor="middle" font-size="13">สมศักดิ์</text>
+                        <text x="250" y="40" text-anchor="middle" font-size="14" font-weight="bold">85</text>
+                        
+                        <rect x="300" y="90" width="60" height="110" fill="#e91e63" opacity="0.7"/>
+                        <text x="330" y="220" text-anchor="middle" font-size="13">สมศรี</text>
+                        <text x="330" y="80" text-anchor="middle" font-size="14" font-weight="bold">70</text>
+                        
+                        <text x="200" y="245" text-anchor="middle" font-size="16" font-weight="bold">คะแนนสอบ (คะแนน)</text>
+                    </svg>
+                `,
+                'table-rainfall': `
+                    <svg viewBox="0 0 350 160" xmlns="http://www.w3.org/2000/svg" width="350">
+                        <rect x="10" y="10" width="330" height="130" fill="white" stroke="#424242" stroke-width="2"/>
+                        
+                        <line x1="10" y1="50" x2="340" y2="50" stroke="#424242" stroke-width="2"/>
+                        <line x1="180" y1="10" x2="180" y2="140" stroke="#424242" stroke-width="2"/>
+                        
+                        <text x="95" y="35" text-anchor="middle" font-size="14" font-weight="bold">วัน</text>
+                        <text x="260" y="35" text-anchor="middle" font-size="14" font-weight="bold">ฝนตก (mm)</text>
+                        
+                        <text x="95" y="73" text-anchor="middle" font-size="14">จันทร์</text>
+                        <text x="260" y="73" text-anchor="middle" font-size="14">35</text>
+                        
+                        <text x="95" y="95" text-anchor="middle" font-size="14">อังคาร</text>
+                        <text x="260" y="95" text-anchor="middle" font-size="14">42</text>
+                        
+                        <text x="95" y="117" text-anchor="middle" font-size="14">พุธ</text>
+                        <text x="260" y="117" text-anchor="middle" font-size="14">58</text>
+                        
+                        <text x="95" y="135" text-anchor="middle" font-size="14">พฤหัสบดี</text>
+                        <text x="260" y="135" text-anchor="middle" font-size="14">45</text>
+                    </svg>
+                `
+            };
+            
+            return images[imageType] || '';
+        }
+
+        // สร้างข้อสอบ
+        function initializeTest() {
+            const container = document.getElementById('testSection');
+            container.innerHTML = '';
+
+            questions.forEach((q, idx) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'question-item';
+                qDiv.id = `q-${idx}`;
+                
+                let contentHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${idx + 1}</div>
+                        <div class="question-text">${q.q}</div>
+                    </div>
+                `;
+
+                if (q.image) {
+                    contentHTML += `
+                        <div class="question-image">
+                            ${generateImage(q.image)}
+                        </div>
+                    `;
+                }
+
+                if (q.type === 'choice') {
+                    contentHTML += '<div class="choices">';
+                    q.choices.forEach((choice, cIdx) => {
+                        contentHTML += `
+                            <div class="choice-item">
+                                <input type="radio" 
+                                       name="q${idx}" 
+                                       id="q${idx}-c${cIdx}" 
+                                       value="${cIdx}"
+                                       onchange="updateProgress()">
+                                <label for="q${idx}-c${cIdx}">${choice}</label>
+                            </div>
+                        `;
+                    });
+                    contentHTML += '</div>';
+                } else {
+                    contentHTML += `
+                        <div class="input-answer">
+                            <input type="text" 
+                                   id="q${idx}-input" 
+                                   placeholder="พิมพ์คำตอบที่นี่"
+                                   onkeyup="updateProgress()">
+                        </div>
+                    `;
+                }
+
+                qDiv.innerHTML = contentHTML;
+                container.appendChild(qDiv);
+            });
+
+            document.getElementById('testDate').valueAsDate = new Date();
+        }
+
+        function updateProgress() {
+            let answered = 0;
+            const total = questions.length;
+
+            questions.forEach((q, idx) => {
+                if (q.type === 'choice') {
+                    const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                    if (selected) answered++;
+                } else {
+                    const input = document.getElementById(`q${idx}-input`);
+                    if (input && input.value.trim() !== '') answered++;
+                }
+            });
+
+            const progressBar = document.getElementById('progressBar');
+            const percent = Math.round((answered / total) * 100);
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = `${answered}/${total} ข้อ`;
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = (answered !== total);
+        }
+
+        async function submitTest() {
+            const studentName = document.getElementById('studentName').value.trim();
+            const schoolName = document.getElementById('schoolName').value.trim();
+
+            if (!studentName || !schoolName) {
+                alert('❌ กรุณากรอกชื่อนักเรียนและชื่อโรงเรียนให้ครบถ้วน');
+                return;
+            }
+
+            const answers = {};
+            const results = {};
+
+            questions.forEach((q, idx) => {
+                let userAnswer = null;
+                
+                if (q.type === 'choice') {
+                    const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                    if (selected) {
+                        userAnswer = parseInt(selected.value);
+                    }
+                } else {
+                    const input = document.getElementById(`q${idx}-input`);
+                    if (input) {
+                        userAnswer = input.value.trim().replace(/,/g, '');
+                    }
+                }
+
+                answers[`q${idx}`] = userAnswer;
+                
+                let isCorrect = false;
+                if (userAnswer !== null) {
+                    if (q.type === 'choice') {
+                        isCorrect = userAnswer === q.answer;
+                    } else {
+                        const correctAnswer = q.answer.replace(/,/g, '');
+                        isCorrect = userAnswer === correctAnswer;
+                    }
+                }
+
+                if (!results[q.skill]) {
+                    results[q.skill] = { correct: 0, total: 0 };
+                }
+                results[q.skill].total++;
+                if (isCorrect) results[q.skill].correct++;
+            });
+
+            const testData = {
+                timestamp: new Date().toISOString(),
+                studentName: studentName,
+                schoolName: schoolName,
+                gradeLevel: document.getElementById('gradeLevel').value,
+                parentPhone: document.getElementById('parentPhone').value,
+                testDate: document.getElementById('testDate').value,
+                answers: answers,
+                results: results,
+                summary: calculateSummary(results)
+            };
+
+            document.getElementById('actionButtons').style.display = 'none';
+            document.getElementById('loadingSection').classList.add('active');
+
+            try {
+                await sendToGoogleSheets(testData);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                document.getElementById('loadingSection').classList.remove('active');
+                document.getElementById('successMessage').classList.add('active');
+                document.getElementById('testSection').style.display = 'none';
+                document.getElementById('progressBar').parentElement.style.display = 'none';
+
+            } catch (error) {
+                alert('❌ เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง');
+                document.getElementById('loadingSection').classList.remove('active');
+                document.getElementById('actionButtons').style.display = 'flex';
+            }
+        }
+
+        function calculateSummary(results) {
+            let totalCorrect = 0;
+            let totalQuestions = 0;
+            let mastered = 0;
+            let weak = 0;
+            let critical = 0;
+
+            Object.values(results).forEach(r => {
+                totalCorrect += r.correct;
+                totalQuestions += r.total;
+                
+                const percent = Math.round((r.correct / r.total) * 100);
+                if (percent >= 80) mastered++;
+                else if (percent >= 60) weak++;
+                else critical++;
+            });
+
+            return {
+                totalCorrect,
+                totalQuestions,
+                percent: Math.round((totalCorrect / totalQuestions) * 100),
+                mastered,
+                weak,
+                critical
+            };
+        }
+
+
+        // ========================================
+        // 🔗 Google Sheets Integration
+        // ========================================
+        // TODO: แทนที่ YOUR_GOOGLE_APPS_SCRIPT_URL ด้วย URL จริงจาก Google Apps Script
+        // 
+        // 📋 ขั้นตอนการตั้งค่า:
+        // 1. สร้าง Google Sheet ใหม่
+        // 2. Extensions → Apps Script
+        // 3. วางโค้ดจากไฟล์ google-apps-script.js
+        // 4. Deploy → New deployment → Web app
+        // 5. Execute as: Me, Who has access: Anyone
+        // 6. คัดลอก URL แล้วนำมาแทนที่ด้านล่าง
+        
+        const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+
+        async function sendToGoogleSheets(data) {
+            // ตรวจสอบว่าได้ตั้งค่า URL แล้วหรือยัง
+            if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
+                console.warn("⚠️ กรุณาตั้งค่า GOOGLE_SCRIPT_URL ก่อนใช้งาน");
+                console.log("📊 ข้อมูลที่จะส่ง:", data);
+                alert("⚠️ ระบบยังไม่ได้เชื่อมต่อ Google Sheets\nกรุณาติดต่อครูเพื่อแก้ไข");
+                return false;
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                console.log("✅ ส่งข้อมูลไปยัง Google Sheets สำเร็จ");
+                return true;
+                
+            } catch (error) {
+                console.error("❌ เกิดข้อผิดพลาดในการส่งข้อมูล:", error);
+                return false;
+            }
+        }
+
+        initializeTest();
+    </script>
+</body>
+</html>
