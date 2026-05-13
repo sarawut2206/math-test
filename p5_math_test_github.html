@@ -1658,7 +1658,7 @@
         // ========================================
         // 🔗 Google Sheets Integration
         // ========================================
-        // TODO: แทนที่ https://script.google.com/a/macros/nk.ac.th/s/AKfycbxbPFfv3i4BiRP8TD2JVFenyZGZ6MUudUgX2ow4avB-BVwI6kv0TRURTEgWc3dhtFxS/exec ด้วย URL จริงจาก Google Apps Script
+        // TODO: แทนที่ https://script.google.com/macros/s/AKfycbyhoxZ1rgTKv7xRpSMKeOkN0Je9Sv8v12DDi4cibZQUu7HbgwcxRr0bDvIBQXNj8jfF/exec ด้วย URL จริงจาก Google Apps Script
         // 
         // 📋 ขั้นตอนการตั้งค่า:
         // 1. สร้าง Google Sheet ใหม่
@@ -1668,11 +1668,11 @@
         // 5. Execute as: Me, Who has access: Anyone
         // 6. คัดลอก URL แล้วนำมาแทนที่ด้านล่าง
         
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/a/macros/nk.ac.th/s/AKfycbxbPFfv3i4BiRP8TD2JVFenyZGZ6MUudUgX2ow4avB-BVwI6kv0TRURTEgWc3dhtFxS/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyhoxZ1rgTKv7xRpSMKeOkN0Je9Sv8v12DDi4cibZQUu7HbgwcxRr0bDvIBQXNj8jfF/exec";
 
         async function sendToGoogleSheets(data) {
             // ตรวจสอบว่าได้ตั้งค่า URL แล้วหรือยัง
-            if (GOOGLE_SCRIPT_URL === "https://script.google.com/a/macros/nk.ac.th/s/AKfycbxbPFfv3i4BiRP8TD2JVFenyZGZ6MUudUgX2ow4avB-BVwI6kv0TRURTEgWc3dhtFxS/exec") {
+            if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyhoxZ1rgTKv7xRpSMKeOkN0Je9Sv8v12DDi4cibZQUu7HbgwcxRr0bDvIBQXNj8jfF/exec") {
                 console.warn("⚠️ กรุณาตั้งค่า GOOGLE_SCRIPT_URL ก่อนใช้งาน");
                 console.log("📊 ข้อมูลที่จะส่ง:", data);
                 alert("⚠️ ระบบยังไม่ได้เชื่อมต่อ Google Sheets\nกรุณาติดต่อครูเพื่อแก้ไข");
